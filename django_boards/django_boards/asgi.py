@@ -1,5 +1,5 @@
 """
-ASGI config for basic_django_web_page project.
+ASGI config for django_boards project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'basic_django_web_page.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_boards.settings')
 
 application = get_asgi_application()
