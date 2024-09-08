@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'boards.apps.BoardsConfig',
     'dotenv',
+    'pylint',
+    'graphviz',
 ]
 
 MIDDLEWARE = [
