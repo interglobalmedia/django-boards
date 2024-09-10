@@ -15,7 +15,9 @@ class Topic(models.Model):
   last_updated = models.DateTimeField(auto_now_add=True)
   board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='topics')
   starter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='topics')
-
+  
+  def __str__(self):
+    return self.subject
 
 class Post(models.Model):
   message = models.TextField(max_length=4000)
@@ -24,7 +26,10 @@ class Post(models.Model):
   updated_at = models.DateTimeField(null=True)
   created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
   updated_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='+')
-  post_liked = models.ManyToManyField(User, default=None, blank=True, related_name='post_liked')
+  post_liked_by = models.ManyToManyField(User, default=None, blank=True, related_name='post_liked_by')
+
+  def __str__(self):
+    return self.message
 
   @property
   def post_num_likes(self):
