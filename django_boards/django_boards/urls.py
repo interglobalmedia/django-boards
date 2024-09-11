@@ -21,5 +21,6 @@ from boards import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('boards/<str:id>/', views.board_topics, name='board_topics'),
     path('admin/', admin.site.urls),
 ]

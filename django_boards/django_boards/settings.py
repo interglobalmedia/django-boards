@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'dotenv',
     'pylint',
     'graphviz',
+    'djlint',
+    'coverage',
 ]
 
 MIDDLEWARE = [
