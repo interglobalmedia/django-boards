@@ -25,18 +25,22 @@
         </tr>
       </thead>
       <tbody>
-        {% for board in boards %}
-        <tr>
-          <td>
-            {{ board.name }}<br>
-            <small class="text-muted d-block">{{ board.description }}</small>
-          </td>
-          <td class="align-middle">0</td>
-          <td class="align-middle">0</td>
-          <td></td>
-        </tr>
-        {% endfor %}
-      </tbody>
+					{% for board in boards %}
+					<tr>
+						<td>
+							<a href="{% url 'board_topics' board.id %}"
+								>{{ board.name }}</a
+							>
+							<small class="text-muted d-block"
+								>{{ board.description }}</small
+							>
+						</td>
+						<td class="align-middle">0</td>
+						<td class="align-middle">0</td>
+						<td></td>
+					</tr>
+					{% endfor %}
+				</tbody>
 
     </table>
     </div>
