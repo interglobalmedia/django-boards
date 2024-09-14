@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'graphviz',
     'djlint',
     'coverage',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
