@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'djlint',
     'coverage',
     'widget_tweaks',
+    'accounts',
 ]
 
 MIDDLEWARE = [
