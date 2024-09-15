@@ -6,3 +6,12 @@
   font-style: normal;
   font-size: 1.75rem;
 }
+
+.nav-link-user {
+  color: #666;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  text-decoration: none;
+  font-weight: 300;
+}
