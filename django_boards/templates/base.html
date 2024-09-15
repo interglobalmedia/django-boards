@@ -12,21 +12,41 @@
     </title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% block stylesheet %}
+    {% endblock stylesheet %}
   </head>
   <body>
-    <!-- As a heading -->
-    <nav class="navbar bg-primary" data-bs-theme="dark">
-      <div class="container-fluid">
-        <a class="navbar-brand mb-0 h1" href="{% url 'index' %}">Django Boards</a>
+    {% block body %}
+      <nav class="navbar bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand mb-0 h1" href="{% url 'index' %}">Django Boards</a>
+          <button class="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#mainMenu"
+                  aria-controls="mainMenu"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav ml-auto">
+              {% comment %} <li class="nav-item">
+                <a class="nav-link-user" href="#">{{ user.username }}</a>
+              </li> {% endcomment %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+      <a class="nav-link-user" href="#">Welcome {{ user.username }}!</a>
+        <ol class="breadcrumb my-4">
+          {% block breadcrumb %}
+          {% endblock breadcrumb %}
+        </ol>
+        {% block content %}
+        {% endblock content %}
       </div>
-    </nav>
-    <div class="container">
-      <ol class="breadcrumb my-4">
-        {% block breadcrumb %}
-        {% endblock breadcrumb %}
-      </ol>
-      {% block content %}
-      {% endblock content %}
-    </div>
+    {% endblock body %}
   </body>
 </html>
