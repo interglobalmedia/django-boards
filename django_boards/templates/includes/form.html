@@ -2,7 +2,7 @@
 
 {% for field in form %}
   <div class="form-group">
-    {{ filed.label_tag }}
+    {{ field.label_tag }}
 
     {% if form.is_bound %}
       {% if field.errors %}
@@ -21,7 +21,7 @@
 
     {% if field.help_text %}
       <small class="form-text text-muted">
-        {{ field.help_text }}
+        {{ field.help_text|safe }}
       </small>
     {% endif %}
   </div>
