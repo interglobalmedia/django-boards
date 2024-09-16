@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'coverage',
     'widget_tweaks',
     'accounts',
+    'soupsieve',
+    'bs4',
+    'html5lib',
 ]
 
 MIDDLEWARE = [
