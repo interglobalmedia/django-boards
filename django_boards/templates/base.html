@@ -17,9 +17,31 @@
   </head>
   <body>
     {% block body %}
-      <nav class="navbar bg-primary" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand mb-0 h1" href="{% url 'index' %}">Django Boards</a>
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'index' %}">Django Boards</a>
+          {% if user.is_authenticated %}
+          <div class="dropdown">
+            <a class="btn btn-primary dropdown-toggle"
+               href="#"
+               role="button"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">{{ user.username }}</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#">My account</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">change password</a>
+                </li>
+                <li>
+                  <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                  </form>
+                </li>
+              </ul>
+            </div>
           <button class="navbar-toggler"
                   type="button"
                   data-toggle="collapse"
@@ -29,17 +51,15 @@
                   aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="mainMenu">
-            <ul class="navbar-nav ml-auto">
-              {% comment %} <li class="nav-item">
-                <a class="nav-link-user" href="#">{{ user.username }}</a>
-              </li> {% endcomment %}
-            </ul>
-          </div>
+           {% else %}
+            <form class="form-inline ml-auto">
+              <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
+              <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign up</a>
+            </form>
+          {% endif %}
         </div>
       </nav>
       <div class="container">
-      <a class="nav-link-user" href="#">Welcome {{ user.username }}!</a>
         <ol class="breadcrumb my-4">
           {% block breadcrumb %}
           {% endblock breadcrumb %}
@@ -48,5 +68,16 @@
         {% endblock content %}
       </div>
     {% endblock body %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
+            integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+            integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
   </body>
 </html>
