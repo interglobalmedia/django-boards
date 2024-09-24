@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from accounts import views as accounts_views
 from boards import views
@@ -74,5 +74,7 @@ urlpatterns = [
     ),
     path("boards/<str:id>/", views.board_topics, name="board_topics"),
     path("boards/<str:id>/new/", views.new_topic, name="new_topic"),
+    path("boards/<id>/topics/<topic_id>/", views.topic_posts, name="topic_posts"),
+    path("boards/<id>/topics/<topic_id>/reply/", views.reply_topic, name="reply_topic"),
     path("admin/", admin.site.urls),
 ]
