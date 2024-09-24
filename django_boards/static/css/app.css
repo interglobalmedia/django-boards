@@ -2,16 +2,71 @@
 
 .navbar-brand {
   font-family: "Peralta", serif;
-  font-weight: 400;
-  font-style: normal;
   font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .nav-item .dropdown {
   color: #666;
   display: flex;
+  font-weight: 300;
   justify-content: flex-end;
   margin-top: 1.5rem;
   text-decoration: none;
-  font-weight: 300;
+}
+
+.breadcrumb-item a {
+  text-decoration: none !important;
+}
+
+.card-header {
+  margin-bottom: 1rem;
+  border: 0;
+  background-image: linear-gradient(to bottom, #b4eeb4, #aa85e5);
+
+}
+
+.card-header > h5 {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.card {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.row.no-gutters:before {
+  background: url('/static/img/user_avatar.svg') center center;
+  border-radius: 50%;
+  content: "";
+  height: 4rem;
+  left: 1rem;
+  object-fit: cover;
+  position: absolute;
+  width: 4rem;
+}
+
+.card-body {
+  width: 100%;
+}
+
+.col {
+  display: flex;
+}
+
+.card-title {
+  margin-left: 5rem;
+  margin-right: 1.5rem;
+}
+
+.post-message {
+  text-align: left;
+}
+
+.like-count {
+  margin-top: 1.25rem;
 }

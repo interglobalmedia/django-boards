@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import Truncator
 
 # Create your models here.
 
@@ -10,6 +11,12 @@ class Board(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_posts_count(self):
+        return Post.objects.filter(topic__board=self).count()
+
+    def get_latest_post(self): # new
+        return Post.objects.filter(topic__board=self).order_by('-created_at').first()
 
 
 class Topic(models.Model):
@@ -17,6 +24,7 @@ class Topic(models.Model):
     last_updated = models.DateTimeField(auto_now_add=True)
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="topics")
     starter = models.ForeignKey(User, on_delete=models.CASCADE, related_name="topics")
+    views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.subject
@@ -32,16 +40,17 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, null=True, related_name="+"
     )
     post_liked_by = models.ManyToManyField(
-        User, default=None, blank=True, related_name="post_liked_by"
+        User, default=None, blank=True, related_name="post_like"
     )
 
     def __str__(self):
-        return self.message
+        truncated_message = Truncator(self.message)
+        return truncated_message.chars(30)
+        # return self.message
 
     @property
     def post_num_likes(self):
-        return self.post_liked.all().count()
-
+        return self.post_liked_by.all().count()
 
 POST_LIKE_CHOICES = (
     ("♥️", "♥️"),

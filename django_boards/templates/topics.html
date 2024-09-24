@@ -9,7 +9,7 @@
   <li class="breadcrumb-item active">{{ board.name }}</li>
 {% endblock breadcrumb %}
 {% block content %}
-<div class="mb-4">
+  <div class="mb-4">
     <a href="{% url 'new_topic' board.id %}" class="btn btn-primary">New topic</a>
   </div>
   <table class="table">
@@ -23,12 +23,15 @@
       </tr>
     </thead>
     <tbody>
-      {% for topic in board.topics.all %}
+      {% for topic in topics %}
         <tr>
-          <td>{{ topic.subject }}</td>
+          <td>
+            <a href="{% url 'topic_posts' board.id topic.id %}">{{ topic.subject }}</a>
+          </td>
           <td>{{ topic.starter.username }}</td>
-          <td>0</td>
-          <td>0</td>
+          <td>{{ topic.replies }}</td>
+          <!-- here -->
+          <td>{{ topic.views }}</td>
           <td>{{ topic.last_updated }}</td>
         </tr>
       {% endfor %}
