@@ -5,6 +5,7 @@ from django.urls import resolve, reverse
 from ..models import Board, Post, Topic
 from ..views import topic_posts
 
+
 class TopicPostsTests(TestCase):
     def setUp(self):
         board = Board.objects.create(name='Django', description='Django board.')

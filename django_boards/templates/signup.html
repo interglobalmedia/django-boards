@@ -1,11 +1,8 @@
 {% extends "base_accounts.html" %}
-
 {% load static %}
-
 {% block stylesheet %}
   <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
 {% endblock stylesheet %}
-
 {% block body %}
   <div class="container">
     <h1 class="text-center logo my-4">
@@ -16,7 +13,7 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Sign up</h3>
-            <form method="post" novalidate>
+            <form method="post" novalidate class="signup-form">
               {% csrf_token %}
               {% include "includes/form.html" %}
               <button type="submit" class="btn btn-primary btn-block">Create an account</button>
