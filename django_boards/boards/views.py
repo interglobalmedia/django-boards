@@ -25,14 +25,15 @@ def new_topic(request, id):
         if form.is_valid():
             topic = form.save(commit=False)
             topic.board = board
-            topic.starter = request.user  # <- here
+            topic.starter = request.user
             topic.save()
             Post.objects.create(
                 message=form.cleaned_data.get('message'),
                 topic=topic,
-                created_by=request.user  # <- and here
+                created_by=request.user
             )
-            return redirect('topic_posts', id=id, topic_id=topic.id)  # redirect to the created topic page
+            # redirect to topic_posts view
+            return redirect('topic_posts', id=id, topic_id=topic.id)
     else:
         form = NewTopicForm()
     return render(request, 'new_topic.html', {'board': board, 'form': form})
@@ -53,8 +54,7 @@ def reply_topic(request, id, topic_id):
             post.topic = topic
             post.created_by = request.user
             post.save()
-            return redirect('topic_posts', id=id, topic_id=topic_id)
+        return redirect('topic_posts', id=id, topic_id=topic_id)
     else:
         form = PostForm()
     return render(request, 'reply_topic.html', {'topic': topic, 'form': form})
-
