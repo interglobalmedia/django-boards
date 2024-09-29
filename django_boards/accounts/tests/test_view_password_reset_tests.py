@@ -12,7 +12,6 @@ from django.utils.http import urlsafe_base64_encode
 import bs4
 import soupsieve as sv
 
-
 class PasswordResetTests(TestCase):
     def setUp(self):
         user = User.objects.create_user(username='john', email='john@doe.com', password='123')
@@ -125,10 +124,12 @@ class PasswordResetConfirmTests(TestCase):
         self.assertEqual(view.func.view_class, auth_views.PasswordResetConfirmView)
 
     def test_csrf(self):
-        # currently does not work. The test returns that "You clicked on invalid link. Try again".
-        uidb64 = self.uid
+        # this does render the token, Just the token is not included in the form.
         token = self.token
+        # Does not work. The test returns that "You clicked on invalid link. Try again".
         self.assertContains(self.response, token)
+        # below is the original one-liner, which also did not work.
+        #self.assertContains(self.response, 'csrfmiddlewaretoken')
 
     def test_contains_form(self):
         # add condition to test whether form is "None" or not. Add condition because there is no form.
@@ -212,7 +213,6 @@ class InvalidPasswordResetConfirmTests(TestCase):
         password_reset_url = reverse('password_reset')
         self.assertContains(self.response, 'invalid password reset link')
         self.assertContains(self.response, 'href="{0}"'.format(password_reset_url))
-
 
 class PasswordResetCompleteTests(TestCase):
     def setUp(self):
