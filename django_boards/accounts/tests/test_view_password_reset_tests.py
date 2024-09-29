@@ -1,4 +1,5 @@
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
@@ -8,9 +9,6 @@ from django.urls import resolve, reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
-
 import bs4
 import soupsieve as sv
 
@@ -18,13 +16,14 @@ import soupsieve as sv
 class PasswordResetTests(TestCase):
     def setUp(self):
         user = User.objects.create_user(username='john', email='john@doe.com', password='123')
+        user.save()
         url = reverse('password_reset')
         self.response = self.client.get(url)
         # prints out "./password-reset/ the url"
         print(url, 'the url')
         # prints out "<TemplateResponse status_code=200, "text/html; charset=utf-8"> get the url"
         print(self.response, 'get the url')
-        user = authenticate(username='john', password='123')
+        auth_user = authenticate(user)
         print(user, 'the authenticated user')
 
     def test_status_code(self):
@@ -47,8 +46,6 @@ class PasswordResetTests(TestCase):
     def test_contains_form(self):
         form = self.response.context.get('form')
         self.assertIsInstance(form, PasswordResetForm)
-        # Prints out "None result of the form printout"
-        print(self.assertIsInstance(form, PasswordResetForm), 'result of the form printout')
 
     def test_form_inputs(self):
         '''

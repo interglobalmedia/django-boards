@@ -1,11 +1,8 @@
 {% extends "base_accounts.html" %}
-
 {% load static %}
-
 {% block stylesheet %}
   <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
 {% endblock stylesheet %}
-
 {% block body %}
   <div class="container">
     <h1 class="text-center logo my-4">
@@ -29,7 +26,7 @@
         </div>
         <div class="text-center py-2">
           <small>
-            <a href="#" class="text-muted">Forgot your password?</a>
+            <a href="{% url 'password_reset' %}"" class="text-muted">Forgot your password?</a>
           </small>
         </div>
       </div>
