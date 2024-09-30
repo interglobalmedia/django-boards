@@ -15,15 +15,12 @@ import soupsieve as sv
 class PasswordResetTests(TestCase):
     def setUp(self):
         user = User.objects.create_user(username='john', email='john@doe.com', password='123')
-        user.save()
         url = reverse('password_reset')
         self.response = self.client.get(url)
-        # prints out "./password-reset/ the url"
+        # prints out "./password_reset/ the url"
         print(url, 'the url')
         # prints out "<TemplateResponse status_code=200, "text/html; charset=utf-8"> get the url"
         print(self.response, 'get the url')
-        auth_user = authenticate(user)
-        print(user, 'the authenticated user')
 
     def test_status_code(self):
         self.assertEqual(self.response.status_code, 200)
@@ -31,7 +28,7 @@ class PasswordResetTests(TestCase):
         print(self.assertEqual(self.response.status_code, 200), 'reset status code')
 
     def test_view_function(self):
-        view = resolve('/password-reset/')
+        view = resolve('/password_reset/')
         self.assertEqual(view.func.view_class, auth_views.PasswordResetView)
         # Prints out "None is anything being returned here?"
         print(self.assertEqual(view.func.view_class, auth_views.PasswordResetView), 'is anything being returned here?')
@@ -97,7 +94,7 @@ class PasswordResetDoneTests(TestCase):
         self.assertEqual(self.response.status_code, 200)
 
     def test_view_function(self):
-        view = resolve('/password-reset/done/')
+        view = resolve('/password_reset/done/')
         self.assertEqual(view.func.view_class, auth_views.PasswordResetDoneView)
 
 
@@ -110,7 +107,7 @@ class PasswordResetConfirmTests(TestCase):
         based on how django creates the token internally:
         https://github.com/django/django/blob/1.11.5/django/contrib/auth/forms.py#L280
         '''
-        self.uid = urlsafe_base64_encode(force_bytes(user.id)).encode()
+        self.uid = urlsafe_base64_encode(force_bytes(user.id))
         self.token = default_token_generator.make_token(user)
 
         url = reverse('password_reset_confirm', kwargs={'uidb64': self.uid, 'token': self.token})
@@ -120,19 +117,14 @@ class PasswordResetConfirmTests(TestCase):
         self.assertEqual(self.response.status_code, 200)
 
     def test_view_function(self):
-        view = resolve('/password-reset-confirm/{uidb64}/{token}/'.format(uidb64=self.uid, token=self.token))
+        view = resolve('/reset/{uidb64}/{token}/'.format(uidb64=self.uid, token=self.token))
         self.assertEqual(view.func.view_class, auth_views.PasswordResetConfirmView)
 
     def test_csrf(self):
-        # this does render the token, Just the token is not included in the form.
-        token = self.token
-        # Does not work. The test returns that "You clicked on invalid link. Try again".
-        self.assertContains(self.response, token)
-        # below is the original one-liner, which also did not work.
-        #self.assertContains(self.response, 'csrfmiddlewaretoken')
+        self.assertContains(self.response, 'csrfmiddlewaretoken')
 
     def test_contains_form(self):
-        # add condition to test whether form is "None" or not. Add condition because there is no form.
+        # add condition to test whether form is "None" or not. Add condition because there is no form. We’re not doing anything with the form to test at this line, we’re just making it available to your code. - thanks to @KenWhitesell, Django Forum
         form = None
         if form is not None:
             # form is None
@@ -146,7 +138,7 @@ class PasswordResetConfirmTests(TestCase):
         self.assertContains(self.response, '<input', 3)
         self.assertContains(self.response, 'type="password"', 2)
 
-        self.response = self.client.get(reverse("password_reset_confirm"))
+        self.response = self.client.get(reverse("password_reset_confirm", kwargs={'uidb64': self.uid, 'token': self.token}))
 
         text = """
             <form method="post" novalidate="" class="password-reset-confirm">
@@ -184,7 +176,7 @@ class PasswordResetConfirmTests(TestCase):
         )
         print(
             sv.select(
-                "form:is(.password-reset-confirm",
+                "form:is(.password-reset-confirm)",
                 soup,
             )
         )
@@ -194,7 +186,7 @@ class PasswordResetConfirmTests(TestCase):
 class InvalidPasswordResetConfirmTests(TestCase):
     def setUp(self):
         user = User.objects.create_user(username='john', email='john@doe.com', password='123abcdef')
-        uid = urlsafe_base64_encode(force_bytes(user.id)).encode()
+        uid = urlsafe_base64_encode(force_bytes(user.id))
         token = default_token_generator.make_token(user)
 
         '''
@@ -223,5 +215,5 @@ class PasswordResetCompleteTests(TestCase):
         self.assertEqual(self.response.status_code, 200)
 
     def test_view_function(self):
-        view = resolve('/password-reset/complete/')
+        view = resolve('/reset/done/')
         self.assertEqual(view.func.view_class, auth_views.PasswordResetCompleteView)
