@@ -4,7 +4,6 @@ from django.urls import resolve, reverse
 from ..models import Board
 from ..views import board_topics
 
-
 class BoardTopicsTests(TestCase):
     def setUp(self):
         Board.objects.create(name='Django', description='Django board.')
