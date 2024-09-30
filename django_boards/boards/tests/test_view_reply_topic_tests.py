@@ -6,7 +6,6 @@ from ..forms import PostForm
 from ..models import Board, Post, Topic
 from ..views import reply_topic
 
-
 class ReplyTopicTestCase(TestCase):
     '''
     Base test case to be used in all `reply_topic` view tests
@@ -20,13 +19,11 @@ class ReplyTopicTestCase(TestCase):
         Post.objects.create(message='Lorem ipsum dolor sit amet', topic=self.topic, created_by=user)
         self.url = reverse('reply_topic', kwargs={'id': self.board.id, 'topic_id': self.topic.id})
 
-
 class LoginRequiredReplyTopicTests(ReplyTopicTestCase):
     def test_redirection(self):
         login_url = reverse('login')
         response = self.client.get(self.url)
         self.assertRedirects(response, '{login_url}?next={url}'.format(login_url=login_url, url=self.url))
-
 
 class ReplyTopicTests(ReplyTopicTestCase):
     def setUp(self):
@@ -35,6 +32,7 @@ class ReplyTopicTests(ReplyTopicTestCase):
         self.response = self.client.get(self.url)
 
     def test_status_code(self):
+        print(self.response, 'location')
         self.assertEqual(self.response.status_code, 200)
 
     def test_view_function(self):
@@ -54,7 +52,6 @@ class ReplyTopicTests(ReplyTopicTestCase):
         '''
         self.assertContains(self.response, '<input', 2)
         self.assertContains(self.response, '<textarea', 1)
-
 
 class SuccessfulReplyTopicTests(ReplyTopicTestCase):
     def setUp(self):
@@ -77,7 +74,6 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
         '''
         self.assertEqual(Post.objects.count(), 2)
 
-
 class InvalidReplyTopicTests(ReplyTopicTestCase):
     def setUp(self):
         '''
@@ -91,6 +87,7 @@ class InvalidReplyTopicTests(ReplyTopicTestCase):
         '''
         An invalid form submission should return to the same page
         '''
+        print(self.url, 'the url')
         self.assertEqual(self.response.status_code, 200)
 
     def test_form_errors(self):
