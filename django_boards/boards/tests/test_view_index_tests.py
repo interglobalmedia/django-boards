@@ -4,7 +4,6 @@ from django.urls import resolve, reverse
 from ..models import Board
 from ..views import index
 
-
 class IndexTests(TestCase):
     def setUp(self):
         self.board = Board.objects.create(name='Django', description='Django board.')

@@ -6,7 +6,6 @@ from ..forms import NewTopicForm
 from ..models import Board, Post, Topic
 from ..views import new_topic
 
-
 class NewTopicTests(TestCase):
     def setUp(self):
         Board.objects.create(name='Django', description='Django board.')
@@ -79,7 +78,6 @@ class NewTopicTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFalse(Topic.objects.exists())
         self.assertFalse(Post.objects.exists())
-
 
 class LoginRequiredNewTopicTests(TestCase):
     def setUp(self):
