@@ -18,7 +18,7 @@ class PasswordChangeTests(TestCase):
         self.assertEqual(self.response.status_code, 200)
 
     def test_url_resolves_correct_view(self):
-        view = resolve('/settings/password/')
+        view = resolve('/password_change/')
         self.assertEqual(view.func.view_class, auth_views.PasswordChangeView)
 
     def test_csrf(self):
