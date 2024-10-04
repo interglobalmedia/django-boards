@@ -17,7 +17,7 @@ class ReplyTopicTestCase(TestCase):
         user = User.objects.create_user(username=self.username, email='john@doe.com', password=self.password)
         self.topic = Topic.objects.create(subject='Hello, world', board=self.board, starter=user)
         Post.objects.create(message='Lorem ipsum dolor sit amet', topic=self.topic, created_by=user)
-        self.url = reverse('reply_topic', kwargs={'id': self.board.id, 'topic_id': self.topic.id})
+        self.url = reverse('reply_topic', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
 
 class LoginRequiredReplyTopicTests(ReplyTopicTestCase):
     def test_redirection(self):
@@ -63,7 +63,7 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
         '''
         A valid form submission should redirect the user
         '''
-        topic_posts_url = reverse('topic_posts', kwargs={'id': self.board.id, 'topic_id': self.topic.id})
+        topic_posts_url = reverse('topic_posts', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
         self.assertRedirects(self.response, topic_posts_url)
 
     def test_reply_created(self):
@@ -84,12 +84,12 @@ class InvalidReplyTopicTests(ReplyTopicTestCase):
         self.response = self.client.post(self.url, {})
 
     def test_status_code(self):
-        # get the self.client.post(self.url, {}) which has status code of 200
-        response = self.client.get(self.url, {})
-        self.assertEqual(response.status_code, 200)
         '''
         An invalid form submission should return to the same page
         '''
+        # get the self.client.post(self.url, {}) which has status code of 200
+        response = self.client.get(self.url, {})
+        self.assertEqual(response.status_code, 200)
         
     def test_form_errors(self):
         form = None
