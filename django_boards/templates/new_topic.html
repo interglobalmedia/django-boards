@@ -7,7 +7,7 @@
     <a href="{% url 'index' %}">Boards</a>&nbsp;
   </li>
   <li class="breadcrumb-item">
-    <a href="{% url 'board_topics' board.id %}">{{ board.name }}</a>
+    <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
   </li>
   <li class="breadcrumb-item active">New Topic</li>
 {% endblock breadcrumb %}
