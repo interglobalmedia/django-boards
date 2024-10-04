@@ -24,7 +24,7 @@ from boards import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.BoardListView.as_view(), name="index"),
     path("signup/", accounts_views.signup, name="signup"),
     path(
         "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
@@ -72,9 +72,25 @@ urlpatterns = [
         ),
         name="password_change_done",
     ),
-    path("boards/<str:id>/", views.board_topics, name="board_topics"),
-    path("boards/<str:id>/new/", views.new_topic, name="new_topic"),
-    path("boards/<id>/topics/<topic_id>/", views.topic_posts, name="topic_posts"),
-    path("boards/<id>/topics/<topic_id>/reply/", views.reply_topic, name="reply_topic"),
+    path("boards/<pk>/", views.board_topics, name="board_topics"),
+    path("boards/<pk>/new/", views.new_topic, name="new_topic"),
+    path("boards/<pk>/topics/<topic_pk>/", views.topic_posts, name="topic_posts"),
+    path("boards/<pk>/topics/<topic_pk>/reply/", views.reply_topic, name="reply_topic"),
+    path(
+        "boards/<pk>/topics/<topic_pk>/posts/<post_pk>/edit/",
+        views.PostUpdateView.as_view(),
+        name="edit_post",
+    ),
+    path(
+        "boards/<pk>/topics/<topic_pk>/posts/<post_pk>/detail/",
+        views.PostDetailView.as_view(),
+        name="post_detail",
+    ),
+    path(
+        "boards/<pk>/topics/<topic_pk>/posts/<post_pk>/delete/",
+        views.PostDeleteView.as_view(),
+        name="delete_post",
+    ),
+    # path("like/<like_pk>/", views.post_like, name="like_post"),
     path("admin/", admin.site.urls),
 ]
