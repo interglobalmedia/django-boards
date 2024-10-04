@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from ..models import Board
-from ..views import index
+from ..views import BoardListView
 
 class IndexTests(TestCase):
     def setUp(self):
@@ -15,8 +15,8 @@ class IndexTests(TestCase):
 
     def test_home_url_resolves_home_view(self):
         view = resolve('/')
-        self.assertEqual(view.func, index)
+        self.assertEqual(view.func.view_class, BoardListView)
 
     def test_home_view_contains_link_to_topics_page(self):
-        board_topics_url = reverse('board_topics', kwargs={'id': self.board.id})
+        board_topics_url = reverse('board_topics', kwargs={'pk': self.board.pk})
         self.assertContains(self.response, 'href="{0}"'.format(board_topics_url))
