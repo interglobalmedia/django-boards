@@ -70,3 +70,53 @@
 .like-count {
   margin-top: 1.25rem;
 }
+
+.reply-button {
+  margin-left: 2.5rem;
+}
+
+/* Make copy text appear and disappear using CSS transitions */
+
+#copy-header {
+  position: relative;
+}
+
+#copy-header #feedback {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+}
+
+#copy-header .link-icon,
+#copy-header #feedback::after {
+  display: block;
+  transition: 0.2s;
+}
+
+#copy-header:hover .link-icon {
+  opacity: 1;
+}
+
+#copy-header #feedback::after {
+  content: copied;
+  opacity: 1;
+}
+
+#copy-header:hover #feedback:after {
+  opacity: 1;
+}
+
+/* End make copy text appear and disappear using CSS transitions */
+
+.link-icon {
+  font-size: 1.5rem;
+  width: 2.25rem;
+}
+
+.reply-icon {
+  font-size: 1.3rem;
+}
+
+.topic-posts-btn-edit {
+  margin-right: 1rem;
+}
