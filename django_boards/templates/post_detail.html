@@ -16,38 +16,31 @@
   <li class="breadcrumb-item active">Topic post detail</li>
 {% endblock breadcrumb %}
 {% block content %}
-  <div class="row no-gutters">
-    <div class="col-md-8">
-      <div class="card-body col-md-8">
-        <div class="col">
-          <h5 class="card-title text-muted">{{ post.created_by.username }}</h5>
-          <p class="card-text">
-            <small class="text-muted">{{ post.created_at }}</small>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-8">
+        <div class="card-body col-md-8">
+          <div class="col">
+            <h5 class="card-title text-muted">{{ post.created_by.username }}</h5>
+            <p class="card-text">
+              <small class="text-muted">{{ post.created_at }}</small>
+            </p>
+          </div>
+          <p class="mt-4">
+            <small>Posts: {{ post.created_by.posts.count }}</small>
           </p>
+          <div class="post-message">{{ post.message }}</div>
         </div>
-        <p class="mt-4">
-          <small>Posts: {{ post.created_by.posts.count }}</small>
-        </p>
-        <div class="post-message">{{ post.message }}</div>
       </div>
     </div>
-  </div>
-  <div class="w-25 mb-4 mt-3" id="copy-header">
-    <a id="copy-button"
-       class="btn btn-primary"
-       role="button"
-       role="button"
-       title="Copy link to this topic to Clipboard">
-      <i class="link-icon fa fa-link" aria-hidden="true"></i>
-    </a>
-    <div id="feedback"></div>
-    {% comment %} <div class="d-inline-flex flex-row">
-      <form action="{% url 'like_post' post.topic.board.pk post.pk %}" method="post">
-        {% csrf_token %}
-        <button type="submit" name="post_id" class="btn btn-primary btn-sm" value={{ post.id }}>Like
-        </button>
-        - {{ total_likes }}
-      </form>
-    </div> {% endcomment %}
+    <div class=" mb-4 mt-3" id="copy-header">
+      <a id="copy-button"
+         class="btn btn-primary"
+         role="button"
+         title="Copy link to this topic to Clipboard">
+        <i class="fa fa-link" aria-hidden="true"></i>
+      </a>
+      <div id="feedback"></div>
+    </div>
   </div>
 {% endblock content %}
