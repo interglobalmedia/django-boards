@@ -92,6 +92,6 @@ urlpatterns = [
         views.PostDeleteView.as_view(),
         name="delete_post",
     ),
-    # path("like/<like_pk>/", views.post_like, name="like_post"),
+    path('avatar/', include('avatar.urls')),
     path("admin/", admin.site.urls),
 ]
