@@ -71,10 +71,6 @@
   text-align: left;
 }
 
-.like-count {
-  margin-top: 1.25rem;
-}
-
 .reply-button {
   margin-left: 2.5rem;
 }
@@ -82,36 +78,28 @@
 /* Make copy text appear and disappear using CSS transitions */
 
 #copy-header {
-  position: relative;
-  margin-left: 1rem;
+	position: relative;
 }
 
-#copy-header #feedback {
-  position: absolute;
-  top: -1.5rem;
-  left: 0;
+#copy-header .copy-button::before {
+	content: '';
+	border-radius: 3px;
+	display: flex;
+	padding: 0.25rem;
+	position: absolute;
+	top: -2rem;
+	left: 0;
+	width: 6.255rem;
+	line-height: 1;
+	transition: color 0.5s, transform 0.2s, background-color 0.2s; 
 }
 
-#copy-header .link-icon,
-#copy-header #feedback::after {
-  display: none;
-  transition: 0.2s;
+#copy-header .copy-button:hover::before {
+	content: 'Link copied!';
+	color: #2c7a7b;
+	border: 1px solid #2c7a7b;
+	background: #b4eeb4;
 }
-
-#copy-header:hover .link-icon {
-  opacity: 1;
-}
-
-#copy-header #feedback::after {
-  content: copied;
-  opacity: 1;
-}
-
-#copy-header:hover #feedback:after {
-  opacity: 1;
-}
-
-/* End make copy text appear and disappear using CSS transitions */
 
 /* link icon styling */
 .link-icon {
@@ -151,9 +139,7 @@ button.top {
 	border: none;
 	border: 3px solid transparent;
 	border-radius: 0.5;
-	display: flex;
 	font-size: 1.5rem;
-	justify-content: space-around;
 	outline: none;
 	position: fixed;
 	transition: color 0.5s, transform 0.2s, background-color 0.2s;
@@ -173,6 +159,7 @@ button.top, button.bottom {
 	align-items: center;
 	justify-content: space-between;
 	margin: 0 0.5rem 0 0;
+	/* Initially hide the buttons via opacity property */
   opacity: 0;
 	padding: 20px 9.5px 20px 18px;
 	text-align: center;
