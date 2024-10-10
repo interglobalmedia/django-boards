@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'soupsieve',
     'bs4',
     'html5lib',
+    'markdown',
 ]
 
 MIDDLEWARE = [
