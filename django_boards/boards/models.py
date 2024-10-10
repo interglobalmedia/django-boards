@@ -56,9 +56,5 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"pk": self.pk})
 
-<<<<<<< Updated upstream
     def get_message_as_markdown(self):
-=======
-    def et_message_as_markdown(self):
->>>>>>> Stashed changes
         return mark_safe(markdown(self.message, safe_mode='escape'))
