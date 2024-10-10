@@ -44,7 +44,7 @@
 }
 
 .row.no-gutters:before {
-  background: url('/static/img/user_avatar.svg') center center;
+  /* background: url('/static/img/user_avatar.svg') center center; */
   border-radius: 50%;
   content: "";
   height: 4rem;
