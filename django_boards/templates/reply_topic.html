@@ -33,10 +33,7 @@
               <small class="text-muted">{{ post.created_at }}</small>
             </div>
           </div>
-          <div class="mb-2 mt-3">{{ post.message }}</div>
-        </div>
-        <div class="col-6 text-right">
-          <small>{{ post.post_liked_by.all.count }} Likes</small>
+          <div class="mb-2 mt-3">{{ post.get_message_as_markdown }}</div>
         </div>
       </div>
     </div>
