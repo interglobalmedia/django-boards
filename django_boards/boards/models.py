@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.utils.text import Truncator
+from django.utils.html import mark_safe
+from markdown import markdown
 
 # Create your models here.
 
@@ -53,3 +55,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"pk": self.pk})
+
+    def get_message_as_markdown(self):
+        return mark_safe(markdown(self.message, safe_mode='escape'))
