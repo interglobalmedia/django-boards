@@ -14,16 +14,15 @@
 {% endblock breadcrumb %}
 {% block content %}
   <div class="d-inline-flex flex-row w-50">
-    <div class=" mb-4 mt-3" id="copy-header">
-      <a id="copy-button"
-         class="btn btn-primary"
+    <div class=" mb-4 mt-4" id="copy-header">
+      <a href="#"
+         id="copy-button"
+         class="copy-button btn btn-primary"
          role="button"
-         title="Copy link to this topic to Clipboard">
-        <i class="fa fa-link" aria-hidden="true"></i>
-      </a>
+         title="Copy link to post to Clipboard"><i class="fa fa-link" aria-hidden="true"></i></a>
       <div id="feedback"></div>
     </div>
-    <div class="reply-button mt-3">
+    <div class="reply-button mt-4">
       <a href="{% url 'reply_topic' topic.board.pk topic.pk %}"
          class="btn btn-primary"
          role="button"><i class="reply-icon fa-solid fa-reply"></i> Reply</a>
@@ -48,7 +47,7 @@
             <p class="mt-4">
               <small>Posts: {{ post.created_by.posts.count }}</small>
             </p>
-            <div class="post-message">{{ post.message }}</div>
+            <div class="post-message">{{ post.get_message_as_markdown }}</div>
             {% if post.created_by == user %}
               <div class="d-inline-flex flex-row">
                 <div class="topic-posts-btn-edit mt-3">
