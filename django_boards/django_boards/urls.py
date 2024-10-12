@@ -23,10 +23,13 @@ from boards import views
 
 from django.contrib.auth import views as auth_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path("", views.BoardListView.as_view(), name="index"),
     path("signup/", accounts_views.signup, name="signup"),
-    path('account/', accounts_views.UserUpdateView.as_view(), name='my_account'),
+    path('', include('accounts.urls')),
     path(
         "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
     ),
@@ -94,4 +97,4 @@ urlpatterns = [
     ),
     path('avatar/', include('avatar.urls')),
     path("admin/", admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

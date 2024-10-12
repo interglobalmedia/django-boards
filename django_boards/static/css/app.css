@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Peralta&family=Quicksand:wght@300..700&display=swap');
 
-/* body {
-  overflow-y: scroll;
-} */
+body {
+	/* sticky footer related styling */
+  display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: "Quicksand", sans-serif;
+}
+
+/* sticky footer related styling */
+.site-content {
+	flex: 1;
+	width: 100%;
+}
 
 .navbar-brand {
   font-family: "Peralta", serif;
@@ -26,9 +37,7 @@
 
 .card-header {
   margin-bottom: 1rem;
-  border: 0;
-  background-image: linear-gradient(to bottom, #b4eeb4, #aa85e5);
-
+  /* background-image: linear-gradient(to bottom, #b4eeb4, #aa85e5); */
 }
 
 .card-header > h5 {
@@ -37,7 +46,6 @@
 }
 
 .card {
-  border: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -264,3 +272,41 @@ button.shrink-border:hover::after {
 	opacity: 1;
 	transform: scaleX(1) scaleY(1);
 }
+
+/*  user profile avatar styling */
+.django-avatar {
+	margin-left: 0.75rem;
+	padding-left: 1rem;
+}
+
+.profile-avatar {
+	margin-left: -0.25rem;
+	width: 80px;
+	height: 80px;
+	margin-top: 0.5rem;
+}
+
+/* django-avatar and profile avatar styling */
+img#user_avatar.img-circle.img-responsive {
+	border-radius: 50%;
+	cursor: pointer;
+	margin-left: -2rem;
+}
+
+small {
+	padding-left: 1rem;
+}
+
+.post-message p {	
+	padding-left: 1rem;
+}
+
+.user-post-buttons {
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+}
+
+
+
+
+

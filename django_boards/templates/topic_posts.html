@@ -6,13 +6,15 @@
   {{ topic.subject }}
 {% endblock title %}
 {% block breadcrumb %}
-  <li class="breadcrumb-item">
-    <a href="{% url 'index' %}">Boards</a>
-  </li>
-  <li class="breadcrumb-item">
-    <a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}</a>
-  </li>
-  <li class="breadcrumb-item active">{{ topic.subject }}</li>
+  <ul class="breadcrumb bg-light">
+    <li class="breadcrumb-item">
+      <a href="{% url 'index' %}">Boards</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}</a>
+    </li>
+    <li class="breadcrumb-item active">{{ topic.subject }}</li>
+  </ul>
 {% endblock breadcrumb %}
 {% block content %}
   <div class="d-inline-flex flex-row w-50">
@@ -22,7 +24,6 @@
          class="copy-button btn btn-primary"
          role="button"
          title="Copy link to post to Clipboard"><i class="fa fa-link" aria-hidden="true"></i></a>
-      <div id="feedback"></div>
     </div>
     <div class="reply-button mt-4">
       <a href="{% url 'reply_topic' topic.board.pk topic.pk %}"
@@ -31,9 +32,9 @@
     </div>
   </div>
   {% for post in posts %}
-    <div class="card mb-3 {% if forloop.first %}border-light{% endif %}">
+    <div class="card mb-3 {% if forloop.first %}{% endif %}">
       {% if forloop.first %}
-        <div class="card-header bg-info text-white align-items-center py-2 px-3">
+        <div class="card-header bg-dark text-white align-items-center py-2 px-3">
           <h5>{{ topic.subject }}</h5>
         </div>
       {% endif %}
@@ -46,18 +47,24 @@
                 <small class="text-muted">{{ post.created_at }}</small>
               </p>
             </div>
-            <div class="django-avatar">{% avatar user %}</div>
-            <img src="{{ post.created_by|gravatar }}"
-                 alt="{{ post.created_by.username }}"
-                 class="w-100 rounded">
+            {% if user == post.created_by %}
+              <div class="profile-avatar">
+                <img class="rounded-circle account-img"
+                     alt="{{ user.username }}"
+                     src="{{ user.profile.avatar.url }}"
+                     width="80"
+                     height="80" />
+              </div>
+            {% else %}
+              <div class="django-avatar">{% avatar post.created_by class="img-circle img-responsive" id="user_avatar" %}</div>
+            {% endif %}
+          </div>
+          <div class="mb-4">
             <small>Posts: {{ post.created_by.posts.count }}</small>
           </div>
-          <p>
-            <small>Posts: {{ post.created_by.posts.count }}</small>
-          </p>
           <div class="post-message">{{ post.get_message_as_markdown }}</div>
           {% if post.created_by == user %}
-            <div class="d-inline-flex flex-row">
+            <div class="d-inline-flex flex-row user-post-buttons">
               <div class="topic-posts-btn-edit mt-3">
                 <a href="{% url 'edit_post' post.topic.board.pk post.topic.pk post.pk %}"
                    class="btn btn-primary btn-sm"
@@ -70,7 +77,7 @@
               </div>
             </div>
           {% else %}
-            <div class="mt-3">
+            <div class="mt-3 user-post-buttons">
               <a href="{% url 'post_detail' post.topic.board.pk post.topic.pk post.pk %}"
                  class="btn btn-primary btn-sm"
                  role="button">Post detail</a>
@@ -79,7 +86,6 @@
         </div>
       </div>
     </div>
-  </div>
-{% endfor %}
-{% include "includes/pagination.html" %}
+  {% endfor %}
+  {% include "includes/pagination.html" %}
 {% endblock content %}
