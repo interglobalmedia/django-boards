@@ -3,7 +3,12 @@
   My account
 {% endblock title %}
 {% block breadcrumb %}
-  <li class="breadcrumb-item active">My account</li>
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'index' %}">Boards</a>
+    </li>
+    <li class="breadcrumb-item active">My account</li>
+  </ul>
 {% endblock breadcrumb %}
 {% block content %}
   <div class="row">
