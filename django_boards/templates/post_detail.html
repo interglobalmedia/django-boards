@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}}
 {% load static %}
 {% block title %}
   Post detail
@@ -21,6 +21,13 @@
       <div class="col-md-8">
         <div class="card-body col-md-8">
           <div class="col">
+            <div class="profile-avatar">
+              <img class="rounded-circle account-img"
+                   alt="{{ post.created_by.username }}"
+                   src="{% static 'img/pen-container.svg' %}"
+                   width="80"
+                   height="80" />
+            </div>
             <h5 class="card-title text-muted">{{ post.created_by.username }}</h5>
             <p class="card-text">
               <small class="text-muted">{{ post.created_at }}</small>
@@ -29,14 +36,14 @@
           <p class="mt-4">
             <small>Posts: {{ post.created_by.posts.count }}</small>
           </p>
-          <div class="post-message">{{ post.message }}</div>
+          <div class="post-message">{{ post.get_message_as_markdown }}</div>
         </div>
       </div>
     </div>
     <div class=" mb-4 mt-3" id="copy-header">
       <a href="#"
          id="copy-button"
-         class="copy-button btn btn-primary"
+         class="copy-button btn btn-primary ml-2"
          role="button"
          title="Copy link to this topic to Clipboard">
         <i class="fa fa-link" aria-hidden="true"></i>

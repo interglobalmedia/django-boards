@@ -1,7 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Peralta&family=Quicksand:wght@300..700&display=swap');
 
-body {
+/* CSS reset for cross-browser compatibility re margins and padding */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* for cross-browser compatibility smooth scrolling */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* end for cross-browser compatibility smooth scrolling */
+
+/* .site class is set to body element */
+
+.site {
 	/* sticky footer related styling */
   display: flex;
 	flex-direction: column;
@@ -9,11 +26,49 @@ body {
 	font-family: "Quicksand", sans-serif;
 }
 
-/* sticky footer related styling */
 .site-content {
 	flex: 1;
 	width: 100%;
 }
+
+/* end sticky footer related styling */
+
+/* navbar custom styling. creates space to left of Django Boards logo. */
+
+.navbar {
+  padding-left: 0.5rem;
+}
+
+/* cross browser compatibility styling for the responsive navigation hamburger icon styling */
+
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:active, .navbar-toggler-icon:focus {
+  border: none;
+  outline: none;
+	/* for Firefox. Removed thick border on focus */
+	box-shadow: none;
+}
+
+/* end cross browser compatibility styling for the responsive navigation hamburger icon styling *
+
+/* hamburger styling */
+
+.navbar-toggler {
+  right: 0.5rem;
+}
+
+/* make navigation flex end in larger viewports (> 1006px) */
+
+@media (min-width: 1007px) {
+  .collapse.navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+  }
+}
+
+/* hamburger styling *
+
+/* Website logo styling */
 
 .navbar-brand {
   font-family: "Peralta", serif;
@@ -22,18 +77,13 @@ body {
   font-weight: 400;
 }
 
-.nav-item .dropdown {
-  color: #666;
-  display: flex;
-  font-weight: 300;
-  justify-content: flex-end;
-  margin-top: 1.5rem;
-  text-decoration: none;
-}
+/* breadcrumb item styling */
 
 .breadcrumb-item a {
   text-decoration: none !important;
 }
+
+/*  card related styling */
 
 .card-header {
   margin-bottom: 1rem;
@@ -51,15 +101,8 @@ body {
   justify-content: flex-start;
 }
 
-.row.no-gutters:before {
-  /* background: url('/static/img/user_avatar.svg') center center; */
-  border-radius: 50%;
-  content: "";
-  height: 4rem;
-  left: 1rem;
-  object-fit: cover;
-  position: absolute;
-  width: 4rem;
+.card:last-of-type {
+  margin-bottom: 0.75rem;
 }
 
 .card-body {
@@ -75,9 +118,9 @@ body {
   margin-right: 1.5rem;
 }
 
-.post-message {
-  text-align: left;
-}
+/*  end card related styling */
+
+/* reply button styling in reply_topic.html */
 
 .reply-button {
   margin-left: 2.5rem;
@@ -87,6 +130,7 @@ body {
 
 #copy-header {
 	position: relative;
+  margin-left: 1.75rem;
 }
 
 #copy-header .copy-button::before {
@@ -110,6 +154,7 @@ body {
 }
 
 /* link icon styling */
+
 .link-icon {
   font-size: 1.5rem;
   width: 2.25rem;
@@ -121,10 +166,59 @@ body {
   font-size: 1.2rem;
 }
 
-/* edit button styling */
+/* styling the default avatar or whatever is set to background here if applied. */
+
+.row.no-gutters:before {
+  background: url('/static/img/pen-container.svg') center center;
+  border-radius: 50%;
+  content: "";
+  height: 4rem;
+  top: 1rem;
+  left: 1rem;
+  object-fit: cover;
+  position: absolute;
+  width: 4rem;
+  /* Wanted to add my own "post avatar" so had to display this to none. */
+  display: none;
+}
+
+/*  user profile avatar styling */
+
+.django-avatar {
+	margin-left: 0.75rem;
+	padding-left: 1rem;
+}
+
+.profile-avatar {
+	width: 80px;
+	height: 80px;
+	margin-top: 0.5rem;
+}
+
+/* django-avatar and profile avatar styling */
+
+img#user_avatar.img-circle.img-responsive {
+	border-radius: 50%;
+	cursor: pointer;
+	margin-left: -2rem;
+  margin-top: 1rem;
+  /* Wanted to add my own "post avatar" so had to display this to none. */
+  display: none;
+}
+
+/* topic post edit button styling */
+
+/* topic posts edit button */
 
 .topic-posts-btn-edit {
   margin-right: 1rem;
+}
+
+/*  reply topic post detail button */
+
+.reply-topic-btn-detail {
+  margin-bottom: -1.5rem;
+  margin-left: -1rem;
 }
 
 /* pagination styling */
@@ -142,171 +236,48 @@ body {
   margin-left: 0.25rem;
 }
 
-/*  scroll */
-button.top {
-	border: none;
-	border: 3px solid transparent;
-	border-radius: 0.5;
-	font-size: 1.5rem;
-	outline: none;
-	position: fixed;
-	transition: color 0.5s, transform 0.2s, background-color 0.2s;
-}
+/* scrollTop button styling */
 
-button.top:active {
-	transform: translateY(3px);
-}
-
-button.top::after,
-button.top::before {
-	border-radius: 3px;
-}
-
-button.top, button.bottom {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 0 0.5rem 0 0;
-	/* Initially hide the buttons via opacity property */
-  opacity: 0;
-	padding: 20px 9.5px 20px 18px;
-	text-align: center;
-}
-
-button.bottom {
-	padding: 18px 9.5px 20px 18px;
-}
-
-button.scroll {
-	cursor: pointer;
-	font-size: 3.5rem;
-	position: fixed;
-	text-align: center;
-	text-decoration: none;
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
 	z-index: 1000;
 }
 
-button.scroll.top {
-  bottom: -0.25rem;
-	right: 0;
-}
-
-button.scroll.bottom {
-	right: 0;
-	top: 0;
-}
-
-button.scroll.bottom,
-button.scroll.top {
-	border: none;
-	cursor: pointer;
-	outline: none;
-}
-
-.material-icons {
-	font-size: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: -0.25rem;
-}
-
-button.scroll.top i {
-  margin-top: -0.25rem;
-}
-
-button.scroll.bottom i {
-`margin-bottom: -1rem;
-}
-
-.shrink-border {
-	background-color: transparent;
+.btn.btn-danger.btn-floating.btn-lg {
+	border-radius: 50%;
+	border: 2px solid #000;
+	background: #aecb6e;
 	color: #0978f6;
+	transition: color 0.5s, transform 0.2s, background-color 0.2s;
 }
 
-.shrink-border:hover {
-	background-color: transparent;
-	box-shadow: none;
+.btn.btn-danger.btn-floating.btn-lg:hover {
+	background: #e4ddd3;
+	border-radius: 5px;
 	color: #000;
 }
 
-button.shrink-border::before {
-  background: #aecb6e;
-	border: 3px solid #806f67;
-	border-radius: 50%;
-	content: '';
-	height: 100%;
-	max-height: 60px;
-	max-width: 60px;
-	position: absolute;
-	right: 0;
-	top: 0.6rem;
-	transition: opacity 0.3s, border 0.3s;
-	width: 100%;
-	z-index: -1;
-}
+/* end scrollTop button styling */
 
-button.shrink-border:hover::before {
-	opacity: 0;
-}
-
-button.shrink-border::after {
-	background-color: #e4ddd3;
-	border: 3px solid #806f67;
-	color: blue;
-	content: '';
-	height: 100%;
-	max-height: 60px;
-	max-width: 60px;
-	opacity: 0;
-	position: absolute;
-	right: 0;
-	top: 0.6rem;
-	transform: scaleX(1.1) scaleY(1.3);
-	transition: transform 0.3s;
-	width: 100%;
-	z-index: -1;
-}
-
-button.shrink-border:hover::after {
-	opacity: 1;
-	transform: scaleX(1) scaleY(1);
-}
-
-/*  user profile avatar styling */
-.django-avatar {
-	margin-left: 0.75rem;
-	padding-left: 1rem;
-}
-
-.profile-avatar {
-	margin-left: -0.25rem;
-	width: 80px;
-	height: 80px;
-	margin-top: 0.5rem;
-}
-
-/* django-avatar and profile avatar styling */
-img#user_avatar.img-circle.img-responsive {
-	border-radius: 50%;
-	cursor: pointer;
-	margin-left: -2rem;
-}
+/*  styling for post.created_at, post.created_by, post.created_by.posts.count in in topic_posts.html, reply_topic.html, and post_detail.html  */
 
 small {
 	padding-left: 1rem;
 }
 
-.post-message p {	
-	padding-left: 1rem;
+/* topic post message styling in topic_posts.html */
+
+.post-message {
+  margin-left: 1rem;
+  text-align: left;
 }
+
+/* wrapper div class for edit and delete buttons in topic_posts.html */
 
 .user-post-buttons {
 	margin-left: 1rem;
 	margin-bottom: 1rem;
 }
-
-
-
-
-

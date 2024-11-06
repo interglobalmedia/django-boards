@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load gravatar %}
-{% load avatar_tags %}
+{% comment %} {% load gravatar %} {% endcomment %}
+{% comment %} {% load avatar_tags %} {% endcomment %}
 {% load static %}
 {% block title %}
   {{ topic.subject }}
@@ -32,7 +32,8 @@
     </div>
   </div>
   {% for post in posts %}
-    <div class="card mb-3 {% if forloop.first %}{% endif %}">
+    <div id="{{ post.pk }}"
+         class="card {% if forloop.last %}mb-4{% else %}mb-2{% endif %}">
       {% if forloop.first %}
         <div class="card-header bg-dark text-white align-items-center py-2 px-3">
           <h5>{{ topic.subject }}</h5>
@@ -47,22 +48,18 @@
                 <small class="text-muted">{{ post.created_at }}</small>
               </p>
             </div>
-            {% if user == post.created_by %}
-              <div class="profile-avatar">
-                <img class="rounded-circle account-img"
-                     alt="{{ user.username }}"
-                     src="{{ user.profile.avatar.url }}"
-                     width="80"
-                     height="80" />
-              </div>
-            {% else %}
-              <div class="django-avatar">{% avatar post.created_by class="img-circle img-responsive" id="user_avatar" %}</div>
-            {% endif %}
+            <div class="profile-avatar">
+              <img class="rounded-circle account-img"
+                   alt="{{ post.created_by.username }}"
+                   src="{% static 'img/pen-container.svg' %}"
+                   width="80"
+                   height="80" />
+            </div>
           </div>
           <div class="mb-4">
             <small>Posts: {{ post.created_by.posts.count }}</small>
           </div>
-          <div class="post-message">{{ post.get_message_as_markdown }}</div>
+          <div class="post-message">{{ post.get_message_as_markdown|truncatewords:5 }}</div>
           {% if post.created_by == user %}
             <div class="d-inline-flex flex-row user-post-buttons">
               <div class="topic-posts-btn-edit mt-3">
@@ -77,10 +74,12 @@
               </div>
             </div>
           {% else %}
-            <div class="mt-3 user-post-buttons">
-              <a href="{% url 'post_detail' post.topic.board.pk post.topic.pk post.pk %}"
-                 class="btn btn-primary btn-sm"
-                 role="button">Post detail</a>
+            <div class="d-inline-flex flex-row user-post-buttons">
+              <div class="topic-posts-btn-detail mt-3">
+                <a href="{% url 'post_detail' post.topic.board.pk post.topic.pk post.pk %}"
+                   class="btn btn-primary btn-sm post-detail"
+                   role="button">Post detail</a>
+              </div>
             </div>
           {% endif %}
         </div>

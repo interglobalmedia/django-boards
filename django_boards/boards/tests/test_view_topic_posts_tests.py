@@ -15,7 +15,8 @@ class TopicPostsTests(TestCase):
         self.response = self.client.get(url)
 
     def test_status_code(self):
-        self.assertEqual(self.response.status_code, 200)
+        # had to change to 302 status code because we are being redirected not to the default first topic posts page but the last.
+        self.assertEqual(self.response.status_code, 302)
 
     def test_view_function(self):
         view = resolve('/boards/1/topics/1/')
