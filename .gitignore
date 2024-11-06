@@ -18,3 +18,4 @@ typescript
 .coverage
 htmlcov
 test.txt
+django_boards/templates/includes/textarea_form.html
