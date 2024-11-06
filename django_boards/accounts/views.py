@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import UpdateView
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.shortcuts import get_object_or_404
+from .models import Profile
 
 from django.contrib import messages
 
@@ -47,3 +51,16 @@ def profile(request):
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'users/profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+@method_decorator(login_required, name='dispatch')
+class ProfileListView(ListView):
+    model = Profile
+    context_object_name = 'profiles'
+    template_name = 'users/profiles.html'
+    # paginates profiles.html
+    paginate_by = 3
+
+@login_required
+def profile_detail(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    return render(request, 'users/profile_detail.html', {'profile': profile})
