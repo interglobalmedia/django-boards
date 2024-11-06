@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'html5lib',
     'markdown',
     'avatar',
+    'pygments',
+    'nh3',
 ]
 
 MIDDLEWARE = [
