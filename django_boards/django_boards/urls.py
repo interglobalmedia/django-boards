@@ -90,6 +90,7 @@ urlpatterns = [
         views.PostDetailView.as_view(),
         name="post_detail",
     ),
+    path('like/<int:post_id>/', views.like_post, name='like_post'),
     path(
         "boards/<pk>/topics/<topic_pk>/posts/<post_pk>/delete/",
         views.PostDeleteView.as_view(),
