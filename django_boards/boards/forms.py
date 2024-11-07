@@ -1,7 +1,5 @@
 from django import forms
-from .models import Topic
-from django import forms
-from .models import Post
+from .models import Topic, Post
 import nh3
 
 class HtmlSanitizedCharField(forms.CharField):
@@ -51,6 +49,7 @@ class NewTopicForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
     message = HtmlSanitizedCharField(widget=forms.Textarea)
+
     class Meta:
         model = Post
-        fields = ['message', ]
+        fields = ['message']

@@ -48,10 +48,39 @@
       {% include "includes/scroll-button.html" %}
     {% endblock body %}
     {% block javascript %}
+      <script>
+      const likeButton = document.getElementById('like-button');
+      const likeCount = document.getElementById('like-count');
+      likeButton.addEventListener('pointerdown', function() {
+          const postId = this.dataset.postId
+          fetch(`/like/${postId}/`, {
+              method: 'POST',
+              headers: {
+                  'X-CSRFToken': '{{ csrf_token }}',
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              likeCount.textContent = `Likes: ${data.likes.count}`
+               console.log(data.likes.count, 'the data')
+              if (data.liked) {
+                  likeButton.textContent = '👎';
+                  likeCount.textContent = `Likes: ${data.likes.count}`
+              } else {
+                  likeButton.textContent = '👍'
+                  likeCount.textContent = `Likes: ${data.likes.count}`
+              }
+          }).catch(error => {
+            console.log(error)
+          })
+          return setTimeout(history.go(0), 1000)
+      })
+      </script>
       <!-- JQuery -->
-      <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-              integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-              crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+              integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"></script>
       <!-- Popper JS -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
               integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="

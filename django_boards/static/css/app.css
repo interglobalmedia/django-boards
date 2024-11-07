@@ -281,3 +281,22 @@ small {
 	margin-left: 1rem;
 	margin-bottom: 1rem;
 }
+
+/* like count styling */
+
+#likes-count {
+  font-size: 1.125rem;
+  /* width: 2.125rem; */
+}
+
+/*  like button styling */
+
+#like-button {
+  transition: transform 0.4s ease-in-out;
+}
+
+/* footer styling */
+
+footer {
+  margin: 2rem auto -1.5rem;
+}

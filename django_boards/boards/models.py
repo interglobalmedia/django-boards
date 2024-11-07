@@ -63,10 +63,7 @@ class Post(models.Model):
     updated_by = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, related_name="+"
     )
-    likes = models.ManyToManyField(User, blank=True, related_name="post_likes")
-
-    def total_likes(self):
-        return self.likes.count()
+    likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
 
     def __str__(self):
         # truncated_message = Truncator(self.message)

@@ -7,7 +7,6 @@ from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.views.generic import View
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from .forms import NewTopicForm
@@ -16,10 +15,25 @@ from .models import Board, Topic, Post
 from accounts.models import Profile
 from django.contrib.auth.models import User
 import math
-from django.views.generic.edit import CreateView
 import nh3
+from django.http import JsonResponse
 
-# Create your views here.
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # Toggle the like status
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+        liked = False
+    else:
+        post.likes.add(request.user)
+        liked = True
+
+        return JsonResponse({'likes_count': post.likes.count(), 'liked': liked})
+
+    return JsonResponse({'error': 'Invalid request'})
+
 @method_decorator(login_required, name='dispatch')
 class PostDetailView(DetailView):
     model = Post
