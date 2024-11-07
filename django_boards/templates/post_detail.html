@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class=" mb-4 mt-3" id="copy-header">
+    <div class=" mb-4 mt-3 d-flex" id="copy-header">
       <a href="#"
          id="copy-button"
          class="copy-button btn btn-primary ml-2"
@@ -48,6 +48,16 @@
          title="Copy link to this topic to Clipboard">
         <i class="fa fa-link" aria-hidden="true"></i>
       </a>
+      <button class="btn btn-primary ms-4"
+              id="like-button"
+              data-post-id="{{ post.id }}">
+        {% if request.user not in post.likes.all %}
+          <i class="fa-solid fa-thumbs-up"></i>
+        {% else %}
+          <i class="fa-solid fa-thumbs-down"></i>
+        {% endif %}
+      </button>
     </div>
+    <div class="ms-4 mt-2 mb-4" id="like-count">Likes: {{ post.likes.count }}</div>
   </div>
 {% endblock content %}
