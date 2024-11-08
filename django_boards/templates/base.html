@@ -57,12 +57,22 @@
               method: 'POST',
               headers: {
                   'X-CSRFToken': '{{ csrf_token }}',
-              }
+              },
           })
-          .then(response => response.json())
+          .then(response => {
+            if (response.headers.get('Content-Type').includes('application/json')) {
+              // Parse as JSON
+              return response.json();
+            } else if (response.headers.get('Content-Type').includes('text/plain')) {
+              // Parse as text
+              return response.text();
+            } else {
+              // Handle other response types or errors
+              throw new Error('Unexpected response type');
+            }
+          })
           .then(data => {
               likeCount.textContent = `Likes: ${data.likes.count}`
-               console.log(data.likes.count, 'the data')
               if (data.liked) {
                   likeButton.textContent = '👎';
                   likeCount.textContent = `Likes: ${data.likes.count}`
@@ -71,9 +81,10 @@
                   likeCount.textContent = `Likes: ${data.likes.count}`
               }
           }).catch(error => {
-            console.log(error)
+            // Handle errors
+            console.error(error)
           })
-          return setTimeout(history.go(0), 1000)
+          history.go(0)
       })
       </script>
       <!-- JQuery -->
