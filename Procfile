@@ -1,1 +1,1 @@
-web: gunicorn django-boards.wsgi
+web: gunicorn django_boards.wsgi
