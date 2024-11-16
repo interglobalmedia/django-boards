@@ -59,7 +59,7 @@ else:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+DEBUG = False
 
 # ALLOWED_HOSTS = [
 #     "http://0.0.0.0:5006",
@@ -68,7 +68,7 @@ else:
 #     "https://django-boards-4ce48625014e.herokuapp.com/",
 # ]
 
-if DEBUG:
+if DEBUG == True:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
