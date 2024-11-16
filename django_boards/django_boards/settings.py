@@ -110,7 +110,6 @@ INSTALLED_APPS = [
     "pygments",
     "nh3",
     "storages",
-    "pillow",
 ]
 
 MIDDLEWARE = [
