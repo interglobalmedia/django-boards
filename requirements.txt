@@ -36,6 +36,7 @@ isort==5.13.2
 jsbeautifier==1.15.1
 json5==0.9.25
 Markdown==3.7
+markdown2==2.5.1
 mccabe==0.7.0
 nh3==0.2.18
 packaging==24.2
@@ -45,6 +46,7 @@ platformdirs==4.2.2
 psutil==6.0.0
 psycopg==3.2.3
 psycopg-binary==3.2.3
+psycopg2==2.9.10
 Pygments==2.18.0
 pylint==3.2.6
 pyte==0.8.2
