@@ -41,7 +41,10 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'http://0.0.0.0:5006',
+    'localhost',
     '127.0.0.1',
+    'https://django-boards-4ce48625014e.herokuapp.com/',
 ]
 
 if DEBUG:
