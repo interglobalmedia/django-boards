@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath django_boards django_boards/wsgi --log-file -
+web: gunicorn django_boards/django_boards/wsgi --log-file -
