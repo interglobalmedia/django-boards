@@ -69,12 +69,13 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = [
-#     "http://0.0.0.0:5006",
-#     "localhost",
-#     "127.0.0.1",
-#     "https://django-boards-4ce48625014e.herokuapp.com/",
-# ]
+ALLOWED_HOSTS = [
+    "http://0.0.0.0:5006",
+    "localhost",
+    "127.0.0.1",
+    "https://django-boards-4ce48625014e.herokuapp.com/",
+    "*",
+]
 
 if DEBUG == True:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
