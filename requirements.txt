@@ -36,7 +36,6 @@ isort==5.13.2
 jsbeautifier==1.15.1
 json5==0.9.25
 Markdown==3.7
-markdown2==2.5.1
 mccabe==0.7.0
 nh3==0.2.18
 packaging==24.2
