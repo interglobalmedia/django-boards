@@ -1,1 +1,1 @@
-web: gunicorn django_boards.wsgi --log-file - --timeout 60
+web: gunicorn django_boards/django_boards/wsgi --log-file -
