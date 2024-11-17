@@ -29,7 +29,6 @@ from django.contrib import admin
 
 urlpatterns = [
     path("", views.BoardListView.as_view(), name="index"),
-    path("signup/", accounts_views.signup, name="signup"),
     path('', include('accounts.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     # path(
