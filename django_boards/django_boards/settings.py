@@ -73,11 +73,6 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = ['https://django-boards-4ce48625014e.herokuapp.com']
 
-if DEBUG == True:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Application definition
@@ -122,8 +117,11 @@ MIDDLEWARE = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 STORAGES = {
     "default": {
