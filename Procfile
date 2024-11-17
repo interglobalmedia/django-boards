@@ -1,1 +1,1 @@
-web: gunicorn -b 127.0.0.1:8000 --pythonpath django_boards django_boards.wsgi --log-file -
+web: gunicorn --pythonpath django_boards django_boards.wsgi --log-file -
