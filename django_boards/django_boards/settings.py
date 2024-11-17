@@ -63,17 +63,13 @@ if not IS_HEROKU_APP:
 if IS_HEROKU_APP:
     ALLOWED_HOSTS = ["*"]
 else:
-    ALLOWED_HOSTS = [".localhost", "127.0.0.1", "[::1]", "0.0.0.0"]
+    ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "http://0.0.0.0:5006",
-    "localhost",
-    "127.0.0.1",
-    "https://django-boards-4ce48625014e.herokuapp.com/",
     "*",
 ]
 
