@@ -47,6 +47,7 @@ psutil==6.0.0
 psycopg==3.2.3
 psycopg-binary==3.2.3
 psycopg2==2.9.10
+psycopg2-binary==2.9.10
 Pygments==2.18.0
 pylint==3.2.6
 pyte==0.8.2
