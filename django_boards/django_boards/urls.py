@@ -30,7 +30,6 @@ from django.contrib import admin
 urlpatterns = [
     path("", views.BoardListView.as_view(), name="index"),
     path('', include('accounts.urls')),
-    path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     # path(
     #     "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
@@ -99,4 +98,5 @@ urlpatterns = [
         name="delete_post",
     ),
     path('avatar/', include('avatar.urls')),
+    path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
