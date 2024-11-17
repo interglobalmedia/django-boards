@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
+import django_heroku
 
 load_dotenv()  # take environment variables from .env
 dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
@@ -234,3 +235,5 @@ LOGOUT_REDIRECT_URL = "index"
 LOGIN_REDIRECT_URL = "index"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+django_heroku.settings(locals())
