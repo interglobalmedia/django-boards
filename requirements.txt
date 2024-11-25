@@ -1,6 +1,8 @@
 asgiref==3.8.1
 astroid==3.2.4
 beautifulsoup4==4.12.3
+boto3==1.35.69
+botocore==1.35.69
 Brotli==1.1.0
 certifi==2024.8.30
 charset-normalizer==3.4.0
@@ -34,6 +36,7 @@ html5lib==1.1
 humanize==4.11.0
 idna==3.10
 isort==5.13.2
+jmespath==1.0.1
 jsbeautifier==1.15.1
 json5==0.9.25
 Markdown==3.7
@@ -51,10 +54,12 @@ psycopg2-binary==2.9.10
 Pygments==2.18.0
 pylint==3.2.6
 pyte==0.8.2
+python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 PyYAML==6.0.2
 regex==2024.7.24
 requests==2.32.3
+s3transfer==0.10.4
 setuptools==74.1.2
 shortuuid==1.0.13
 six==1.16.0
