@@ -120,7 +120,7 @@ WSGI_APPLICATION = 'django_boards.wsgi.application'
 DATABASE_URL = str(os.getenv('DATABASE_URL'))
 
 DATABASES = {
-    'default': dj_database_url.config(DATABASE_URL, conn_max_age=600, ssl_require=True)
+    'default': DATABASE_URL
 }
 
 # Password validation
