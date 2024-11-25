@@ -40,9 +40,9 @@ AVATAR_PROVIDERS = (
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['https://django-boards-71e292501730.herokuapp.com']
+ALLOWED_HOSTS = ['https://django-boards-71e292501730.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -118,9 +118,7 @@ WSGI_APPLICATION = 'django_boards.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://uebu6p546is7hm:p879f0023a9c8b0ccd90bd3d1431426ca08e831bd4d3f2bd19fb94eb4f59f3ec8@cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d2hbrciq3olie1'
-    )
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
 
 # Password validation
