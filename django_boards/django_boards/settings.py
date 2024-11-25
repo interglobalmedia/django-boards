@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
 import dj_database_url
 from dotenv import load_dotenv
 load_dotenv() # take environment variables from .env
@@ -23,8 +22,17 @@ load_dotenv(dotenv_path)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # For user uploaded files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = str(os.getenv('BUCKETEER_AWS_ACCESS_KEY_ID'))
+AWS_SECRET_ACCESS_KEY = str(os.getenv('BUCKETEER_AWS_SECRET_ACCESS_KEY'))
+AWS_STORAGE_BUCKET_NAME = str(os.getenv('BUCKETEER_BUCKET_NAME'))
+AWS_S3_REGION_NAME = str(os.getenv('BUCKETEER_AWS_REGION'))
+AWS_S3_ENDPOINT_URL = str(os.getenv('BUCKETEER_AWS_ENDPOINT_URL'))
 
 AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
@@ -47,6 +55,8 @@ ALLOWED_HOSTS = ['https://django-boards-71e292501730.herokuapp.com', 'localhost'
 # Application definition
 
 INSTALLED_APPS = [
+     # Use WhiteNoise's runserver implementation instead of the Django default, for dev-prod parity.
+    "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,6 +79,7 @@ INSTALLED_APPS = [
     'avatar',
     'pygments',
     'nh3',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -117,12 +128,6 @@ WSGI_APPLICATION = 'django_boards.wsgi.application'
 #     }
 # }
 
-# DATABASE_URL = str(os.getenv('DATABASE_URL'))
-
-# DATABASES = {
-#     'default': DATABASE_URL
-# }
-
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
@@ -165,6 +170,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATIC_URL = 'static/'
 
+STORAGES = {
+    # Enable WhiteNoise's GZip and Brotli compression of static assets:
+    # https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -177,5 +190,3 @@ LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'index'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-django_heroku.settings(locals())
