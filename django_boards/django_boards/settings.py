@@ -34,8 +34,6 @@ AWS_STORAGE_BUCKET_NAME = str(os.getenv('BUCKETEER_BUCKET_NAME'))
 AWS_S3_REGION_NAME = str(os.getenv('BUCKETEER_AWS_REGION'))
 AWS_S3_ENDPOINT_URL = str(os.getenv('BUCKETEER_AWS_ENDPOINT_URL'))
 
-AVATAR_STORAGE_ALIAS = 'default'
-
 AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
     'avatar.providers.LibRAvatarProvider',
