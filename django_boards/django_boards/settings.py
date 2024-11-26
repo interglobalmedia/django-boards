@@ -25,12 +25,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# AWS_ACCESS_KEY_ID = str(os.getenv('BUCKETEER_AWS_ACCESS_KEY_ID'))
-# AWS_SECRET_ACCESS_KEY = str(os.getenv('BUCKETEER_AWS_SECRET_ACCESS_KEY'))
-# AWS_STORAGE_BUCKET_NAME = str(os.getenv('BUCKETEER_BUCKET_NAME'))
-# AWS_S3_REGION_NAME = str(os.getenv('BUCKETEER_AWS_REGION'))
-# AWS_S3_ENDPOINT_URL = str(os.getenv('BUCKETEER_AWS_ENDPOINT_URL'))
-
 AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
     'avatar.providers.LibRAvatarProvider',
@@ -47,13 +41,11 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://django-boards-71e292501730.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
-    # Use WhiteNoise's runserver implementation instead of the Django default, for dev-prod parity.
-    "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,16 +68,12 @@ INSTALLED_APPS = [
     'avatar',
     'pygments',
     'nh3',
-    'storages',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    # Django doesn't support serving static assets in a production-ready way, so we use the
-    # excellent WhiteNoise package to do so instead. The WhiteNoise middleware must be listed
-    # after Django's `SecurityMiddleware` so that security redirects are still performed.
-    # See: https://whitenoise.readthedocs.io
+    # Add this as the first middleware after security middleware
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,8 +116,14 @@ WSGI_APPLICATION = 'django_boards.wsgi.application'
 #     }
 # }
 
+# DATABASE_URL = str(os.getenv('DATABASE_URL'))
+
+# DATABASES = {
+#     'default': DATABASE_URL
+# }
+
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
 
 # Password validation
@@ -169,17 +163,6 @@ USE_TZ = True
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATIC_URL = 'static/'
-
-STORAGES = {
-    # Enable WhiteNoise's GZip and Brotli compression of static assets:
-    # https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
