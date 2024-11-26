@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
 import dj_database_url
 from dotenv import load_dotenv
 load_dotenv() # take environment variables from .env
@@ -26,13 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-AWS_ACCESS_KEY_ID = str(os.getenv('BUCKETEER_AWS_ACCESS_KEY_ID'))
-AWS_SECRET_ACCESS_KEY = str(os.getenv('BUCKETEER_AWS_SECRET_ACCESS_KEY'))
-AWS_STORAGE_BUCKET_NAME = str(os.getenv('BUCKETEER_BUCKET_NAME'))
-AWS_S3_REGION_NAME = str(os.getenv('BUCKETEER_AWS_REGION'))
-AWS_S3_ENDPOINT_URL = str(os.getenv('BUCKETEER_AWS_ENDPOINT_URL'))
+# AWS_ACCESS_KEY_ID = str(os.getenv('BUCKETEER_AWS_ACCESS_KEY_ID'))
+# AWS_SECRET_ACCESS_KEY = str(os.getenv('BUCKETEER_AWS_SECRET_ACCESS_KEY'))
+# AWS_STORAGE_BUCKET_NAME = str(os.getenv('BUCKETEER_BUCKET_NAME'))
+# AWS_S3_REGION_NAME = str(os.getenv('BUCKETEER_AWS_REGION'))
+# AWS_S3_ENDPOINT_URL = str(os.getenv('BUCKETEER_AWS_ENDPOINT_URL'))
 
 AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
@@ -195,5 +192,3 @@ LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'index'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-django_heroku.settings(locals())
