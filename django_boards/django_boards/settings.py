@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+import django_heroku
 import dj_database_url
 from dotenv import load_dotenv
 load_dotenv() # take environment variables from .env
@@ -54,6 +55,8 @@ ALLOWED_HOSTS = ['https://django-boards-71e292501730.herokuapp.com', 'localhost'
 # Application definition
 
 INSTALLED_APPS = [
+    # Use WhiteNoise's runserver implementation instead of the Django default, for dev-prod parity.
+    "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -177,6 +180,8 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+DJANGO_SETTINGS_MODULE = "django_boards.settings.prod"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
