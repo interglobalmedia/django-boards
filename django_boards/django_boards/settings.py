@@ -41,7 +41,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://django-boards-bd0f6e2e0b79.herokuapp.com']
+ALLOWED_HOSTS = ['https://django-boards-bd0f6e2e0b79.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -81,6 +81,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CSRF_COOKIE_SECURE = True
+
+# SESSION_COOKIE_SECURE = True
+
+# SECURE_SSL_REDIRECT = True
 
 ROOT_URLCONF = 'django_boards.urls'
 
