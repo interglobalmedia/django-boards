@@ -34,12 +34,14 @@ AWS_STORAGE_BUCKET_NAME = str(os.getenv('BUCKETEER_BUCKET_NAME'))
 AWS_S3_REGION_NAME = str(os.getenv('BUCKETEER_AWS_REGION'))
 AWS_S3_ENDPOINT_URL = str(os.getenv('BUCKETEER_AWS_ENDPOINT_URL'))
 
-# AVATAR_PROVIDERS = (
-#     'avatar.providers.PrimaryAvatarProvider',
-#     'avatar.providers.LibRAvatarProvider',
-#     'avatar.providers.GravatarAvatarProvider',
-#     'avatar.providers.DefaultAvatarProvider',
-# )
+AVATAR_STORAGE_ALIAS = 'default'
+
+AVATAR_PROVIDERS = (
+    'avatar.providers.PrimaryAvatarProvider',
+    'avatar.providers.LibRAvatarProvider',
+    'avatar.providers.GravatarAvatarProvider',
+    'avatar.providers.DefaultAvatarProvider',
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -171,6 +173,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = 'static/'
 
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     # Enable WhiteNoise's GZip and Brotli compression of static assets:
     # https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support
     "staticfiles": {
