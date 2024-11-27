@@ -59,8 +59,6 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://django-boards-b087dbbc34ba.herokuapp.com/', '127.0.0.1', 'localhost']
-
 # Application definition
 
 INSTALLED_APPS = [
