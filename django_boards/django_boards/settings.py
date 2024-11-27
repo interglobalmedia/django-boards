@@ -123,23 +123,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_boards.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# DATABASE_URL = str(os.getenv('DATABASE_URL'))
-
-# DATABASES = {
-#     'default': DATABASE_URL
-# }
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
