@@ -30,7 +30,7 @@ from django.contrib import admin
 urlpatterns = [
     path("", views.BoardListView.as_view(), name="index"),
     path('', include('accounts.urls')),
-    path("accounts/", include("django.contrib.auth.urls")),å
+    path("accounts/", include("django.contrib.auth.urls")),
     path("boards/<pk>/", views.TopicListView.as_view(), name="board_topics"),
     path("boards/<pk>/new/", views.new_topic, name="new_topic"),
     path("boards/<pk>/topics/<topic_pk>/", views.PostListView.as_view(), name="topic_posts"),
