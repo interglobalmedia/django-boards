@@ -217,7 +217,7 @@ if S3_ENABLED:
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
 if not LOCAL_SERVE_MEDIA_FILES:
-    PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
+    PUBLIC_MEDIA_DEFAULT_ACL = 'bucket-owner-full-control'
     PUBLIC_MEDIA_LOCATION = 'media/public/'
     MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'rn_api.utils.storage_backends.PublicMediaStorage'
