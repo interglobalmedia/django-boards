@@ -24,7 +24,7 @@ load_dotenv(dotenv_path)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # For user uploaded files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'collectmedia'
 MEDIA_URL = '/media/'
 
 AVATAR_PROVIDERS = (
@@ -218,7 +218,7 @@ if S3_ENABLED:
 
 if not LOCAL_SERVE_MEDIA_FILES:
     PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
-    PUBLIC_MEDIA_LOCATION = 'media/public'
+    PUBLIC_MEDIA_LOCATION = 'media/public/profile_images'
     MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'rn_api.utils.storage_backends.PublicMediaStorage'
     PRIVATE_MEDIA_DEFAULT_ACL = 'private'
