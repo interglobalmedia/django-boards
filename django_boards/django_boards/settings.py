@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import dj_database_url
 from decouple import config
+import boto3
 
 from dotenv import load_dotenv
 load_dotenv() # take environment variables from .env
@@ -155,6 +156,25 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
+# Create a Boto3 client
+s3 = boto3.client('s3',
+    aws_access_key_id=os.environ['BUCKETEER_AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key=os.environ['BUCKETEER_AWS_SECRET_ACCESS_KEY'])
+
+bucket_name = os.environ['BUCKETEER_BUCKET_NAME']
+bucket_policy = {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": f"arn:aws:s3:::{bucket_name}/*"
+        }
+    ]
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
