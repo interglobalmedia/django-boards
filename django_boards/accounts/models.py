@@ -13,7 +13,7 @@ def _profile_avatar_upload_path(instance, filename):
         file_extension = pathlib.Path(filename).suffix
         settings_dir = os.path.dirname(__file__)
         PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
-        PROFILE_AVATARS_DIR = os.path.join(PROJECT_ROOT, 'django_boards/media/profile_images/')
+        PROFILE_AVATARS_DIR = os.path.join(PROJECT_ROOT, 'django_boards/media/')
         return f'{PROFILE_AVATARS_DIR}/{instance.id}{file_extension}'
 
 # Extending User Model Using a One-To-One Link
