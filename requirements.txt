@@ -13,7 +13,7 @@ cssbeautifier==1.15.1
 decorator==5.1.1
 dill==0.3.8
 dj-database-url==2.3.0
-Django==5.1
+Django==5.1.2
 django-appconf==1.0.6
 django-avatar==8.0.1
 django-etc==1.4.0
