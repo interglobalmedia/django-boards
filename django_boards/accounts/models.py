@@ -23,7 +23,7 @@ class Profile(models.Model):
 
         memfile = BytesIO()
 
-        img = Image.open(self.avatar)
+        img = Image.open(self.avatar.path)
 
         if img.height > 80 or img.width > 80:
             output_size = (80, 80)
