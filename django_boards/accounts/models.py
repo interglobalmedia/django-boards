@@ -26,7 +26,7 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save()
 
-        img = Image.open(self.avatar.name, 'rb')
+        img = Image.open(self.avatar.name, 'w')
 
         if img.height > 80 or img.width > 80:
             new_img = (80, 80)
