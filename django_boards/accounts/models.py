@@ -21,17 +21,12 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save()
 
-        memfile = BytesIO()
-
-        img = Image.open(self.avatar)
+        img = Image.open(self.avatar.file)
 
         if img.height > 80 or img.width > 80:
             new_img = (80, 80)
-            img.thumbnail(new_img, Image.ANTIALIAS)
-            img.save(memfile, 'JPEG', quality=95)
-            default_storage.save(self.avatar.name, memfile)
-            memfile.close()
-            img.close()
+            img.thumbnail(new_img)
+            img.save(self.avatar.file)
 
         def __str__(self):
             return self.user.username
