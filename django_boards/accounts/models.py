@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from PIL import Image
 from utils.storage_backends import PublicMediaStorage
 import pathlib
+from django.core.files.storage import default_storage as storage
 
 def _profile_avatar_upload_path(instance, filename):
     """Provides a clean upload path for user avatar images
@@ -24,12 +25,15 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save()
 
-        img = Image.open(self.avatar.path)
+        #changed img to fh and Image to storage
+        fh = storage.open(self.avatar.path, "w")
+        format = 'jpg'
+        avatar.save(fh, format)
 
-        if img.height > 80 or img.width > 80:
+        if fh.height > 80 or fh.width > 80:
             new_img = (80, 80)
-            img.thumbnail(new_img)
-            img.save(self.avatar.path)
+            fh.thumbnail(new_img)
+            fh.save(self.avatar.path)
 
         def __str__(self):
             return self.user.username
