@@ -11,7 +11,7 @@ import os
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    avatar = models.ImageField(default='default.jpg', upload_to='./', storage=PublicMediaStorage())
+    avatar = models.ImageField(default='static/media/default.jpg', upload_to='profile_images', storage=PublicMediaStorage())
     bio = models.TextField()
 
     def __str__(self):
@@ -27,6 +27,7 @@ class Profile(models.Model):
             new_img = (80, 80)
             img.thumbnail(new_img)
             img.save(self.avatar.file)
+            print(self.avatar.file, 'image file')
 
         def __str__(self):
             return self.user.username
