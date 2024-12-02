@@ -23,13 +23,13 @@ class Profile(models.Model):
 
         memfile = BytesIO()
 
-        img = Image.open(self.avatar.path)
+        img = Image.open(self.avatar)
 
         if img.height > 80 or img.width > 80:
-            output_size = (80, 80)
-            img.thumbnail(output_size, Image.ANTIALIAS)
+            new_img = (80, 80)
+            img.thumbnail(new_img, Image.ANTIALIAS)
             img.save(memfile, 'JPEG', quality=95)
-            default_storage.save(self.img.name, memfile)
+            default_storage.save(self.avatar.name, memfile)
             memfile.close()
             img.close()
 
