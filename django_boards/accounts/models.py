@@ -20,7 +20,7 @@ def _profile_avatar_upload_path(instance, filename):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    avatar = models.ImageField(upload_to='_profile_avatar_upload_path', storage=PublicMediaStorage())
+    avatar = models.ImageField(default='default.jpg', upload_to='_profile_avatar_upload_path', storage=PublicMediaStorage())
     bio = models.TextField()
 
     def __str__(self):
