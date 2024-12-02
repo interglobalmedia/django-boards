@@ -8,13 +8,13 @@ from io import BytesIO
 import os
 
 def _profile_avatar_upload_path(instance, filename):
-    """Provides a clean upload path for user avatar images
-    """
-    file_extension = pathlib.Path(filename).suffix
-    settings_dir = os.path.dirname(__file__)
-    PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
-    PROFILE_AVATARS_DIR = os.path.join(PROJECT_ROOT, 'django_boards/media/profile_images/')
-    return f'{PROFILE_AVATARS_DIR}/{instance.id}{file_extension}'
+        """Provides a clean upload path for user avatar images
+        """
+        file_extension = pathlib.Path(filename).suffix
+        settings_dir = os.path.dirname(__file__)
+        PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+        PROFILE_AVATARS_DIR = os.path.join(PROJECT_ROOT, 'django_boards/media/profile_images/')
+        return f'{PROFILE_AVATARS_DIR}/{instance.id}{file_extension}'
 
 # Extending User Model Using a One-To-One Link
 class Profile(models.Model):
@@ -30,7 +30,7 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save()
 
-        img = Image.open(self.avatar.name, 'w')
+        img = Image.open(self.avatar.path)
 
         if img.height > 80 or img.width > 80:
             new_img = (80, 80)
