@@ -220,7 +220,7 @@ else:
 
 if not LOCAL_SERVE_MEDIA_FILES:
     PUBLIC_MEDIA_DEFAULT_ACL = None
-    PUBLIC_MEDIA_LOCATION = 'media/public/'
+    PUBLIC_MEDIA_LOCATION = 'media/public/profile_images/'
     MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'utils.storage_backends.PublicMediaStorage'
     PRIVATE_MEDIA_DEFAULT_ACL = 'private'
