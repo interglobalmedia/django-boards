@@ -22,3 +22,4 @@ django_boards/templates/includes/textarea_form.html
 django_boards/mediafiles/
 public.json
 cors.json
+default.jpg
