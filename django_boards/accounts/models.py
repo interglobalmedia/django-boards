@@ -3,12 +3,14 @@ from django.contrib.auth.models import User
 from PIL import Image
 from utils.storage_backends import PublicMediaStorage
 import pathlib
+from django.core.files.storage import default_storage
+from io import BytesIO
 
 def _profile_avatar_upload_path(instance, filename):
     """Provides a clean upload path for user avatar images
     """
     file_extension = pathlib.Path(filename).suffix
-    return f'profile_images/{instance.id}{file_extension}'
+    return f'media/public/profile_images/{instance.id}{file_extension}'
 
 # Extending User Model Using a One-To-One Link
 class Profile(models.Model):
