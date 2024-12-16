@@ -216,8 +216,18 @@ if S3_ENABLED:
     AWS_S3_ENDPOINT_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+
+    ]
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+if not LOCAL_SERVE_STATIC_FILES:
+    STATIC_DEFAULT_ACL = 'public-read'
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'utils.storage_backends.StaticStorage'
+    
 if not LOCAL_SERVE_MEDIA_FILES:
     PUBLIC_MEDIA_DEFAULT_ACL = None
     PUBLIC_MEDIA_LOCATION = 'media/public/'
