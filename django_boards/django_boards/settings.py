@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-import dj_database_url
-from decouple import config
-
 from dotenv import load_dotenv
 load_dotenv() # take environment variables from .env
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -24,7 +21,7 @@ load_dotenv(dotenv_path)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # For user uploaded files
-MEDIA_ROOT = BASE_DIR / 'collectmedia'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 AVATAR_PROVIDERS = (
@@ -40,32 +37,14 @@ AVATAR_PROVIDERS = (
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
-# The `DYNO` env var is set on Heroku CI, but it's not a real Heroku app, so we also have to
-# explicitly exclude CI:
-# https://devcenter.heroku.com/articles/heroku-ci#immutable-environment-variables
-IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
-
 # SECURITY WARNING: don't run with debug turned on in production!
-if not IS_HEROKU_APP:
-    DEBUG = True
+DEBUG = True
 
-# On Heroku, it's safe to use a wildcard for `ALLOWED_HOSTS``, since the Heroku router performs
-# validation of the Host header in the incoming HTTP request. On other platforms you may need to
-# list the expected hostnames explicitly in production to prevent HTTP Host header attacks. See:
-# https://docs.djangoproject.com/en/5.1/ref/settings/#std-setting-ALLOWED_HOSTS
-if IS_HEROKU_APP:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
-    # Use WhiteNoise's runserver implementation instead of the Django default, for dev-prod parity.
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,16 +67,10 @@ INSTALLED_APPS = [
     'avatar',
     'pygments',
     'nh3',
-    'storages',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # Django doesn't support serving static assets in a production-ready way, so we use the
-    # excellent WhiteNoise package to do so instead. The WhiteNoise middleware must be listed
-    # after Django's `SecurityMiddleware` so that security redirects are still performed.
-    # See: https://whitenoise.readthedocs.io
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -129,32 +102,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_boards.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if IS_HEROKU_APP:
-    # In production on Heroku the database configuration is derived from the `DATABASE_URL`
-    # environment variable by the dj-database-url package. `DATABASE_URL` will be set
-    # automatically by Heroku when a database addon is attached to your Heroku app. See:
-    # https://devcenter.heroku.com/articles/provisioning-heroku-postgres#application-config-vars
-    # https://github.com/jazzband/dj-database-url
-    DATABASES = {
-        "default": dj_database_url.config(
-            env="DATABASE_URL",
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=True,
-        ),
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    # When running locally in development or in CI, a sqlite database file will be used instead
-    # to simplify initial setup. Longer term it's recommended to use Postgres locally too.
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -190,55 +148,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = 'static/'
 
-STATIC_URL = '/static/'
-
-# Don't store the original (un-hashed filename) version of static files, to reduce slug size:
-# https://whitenoise.readthedocs.io/en/latest/django.html#WHITENOISE_KEEP_ONLY_HASHED_FILES
-WHITENOISE_KEEP_ONLY_HASHED_FILES = True
-
-S3_ENABLED = config('S3_ENABLED', cast=bool, default=True)
-
-LOCAL_SERVE_MEDIA_FILES = config('LOCAL_SERVE_MEDIA_FILES', cast=bool, default=not S3_ENABLED)
-LOCAL_SERVE_STATIC_FILES = config('LOCAL_SERVE_STATIC_FILES', cast=bool, default=not S3_ENABLED)
-
-if (not LOCAL_SERVE_MEDIA_FILES or not LOCAL_SERVE_STATIC_FILES) and not S3_ENABLED:
-    raise ValueError('S3_ENABLED must be true if either media or static files are not served locally')
-
-if S3_ENABLED:
-    AWS_ACCESS_KEY_ID = config('BUCKETEER_AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = config('BUCKETEER_AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = config('BUCKETEER_BUCKET_NAME')
-    AWS_S3_REGION_NAME = config('BUCKETEER_AWS_REGION')
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_SIGNATURE_VERSION = config('S3_SIGNATURE_VERSION', default='s3v4')
-    AWS_S3_ENDPOINT_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-else:
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-
-    ]
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-if not LOCAL_SERVE_STATIC_FILES:
-    STATIC_DEFAULT_ACL = 'public-read'
-    STATIC_LOCATION = 'staticfiles'
-    STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
-    STATICFILES_STORAGE = 'utils.storage_backends.StaticStorage'
-    
-if not LOCAL_SERVE_MEDIA_FILES:
-    PUBLIC_MEDIA_DEFAULT_ACL = None
-    PUBLIC_MEDIA_LOCATION = 'media/public/'
-    MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'utils.storage_backends.PublicMediaStorage'
-    PRIVATE_MEDIA_DEFAULT_ACL = 'private'
-    PRIVATE_MEDIA_LOCATION = 'media/private'
-    PRIVATE_FILE_STORAGE = 'utils.storage_backends.PrivateMediaStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
