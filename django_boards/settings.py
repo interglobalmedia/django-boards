@@ -42,7 +42,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # DEBUG = os.getenv('DEBUG')
 DEBUG = os.environ.get('DEBUG')
 
-MEDIA_ROOT = '/opt/render/project/src/mediafiles/'
+MEDIA_ROOT = '/mediafiles/'
 
 ALLOWED_HOSTS = ['*']
 
