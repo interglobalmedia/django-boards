@@ -18,6 +18,6 @@ typescript
 .coverage
 htmlcov
 test.txt
-django_boards/templates/includes/textarea_form.html
+templates/includes/textarea_form.html
 public.json
 cors.json
