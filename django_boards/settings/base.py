@@ -9,17 +9,11 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
 import os
 from pathlib import Path
-import dj_database_url
-from dotenv import load_dotenv
-load_dotenv() # take environment variables from .env
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
-load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
@@ -28,27 +22,7 @@ AVATAR_PROVIDERS = (
     'avatar.providers.DefaultAvatarProvider',
 )
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
-# DEBUG = os.environ.get('DEBUG')
-
-# For user uploaded files locally
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
-# For user uploaded files on render.com
-MEDIA_ROOT = '/opt/render/project/src/mediafiles/'
-
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['*']
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -108,19 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_boards.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# DATABASES = {
-#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
-# }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -139,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -151,7 +111,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -159,16 +118,7 @@ USE_TZ = True
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-# This production code might break development mode, so we check whether we're in DEBUG mode
-# Tell Django to copy static assets into a path called `static` (this is specific to Render)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
-# and renames the files with unique names for each version to support long-term caching
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -183,4 +133,4 @@ LOGIN_REDIRECT_URL = 'index'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
