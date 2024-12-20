@@ -21,10 +21,6 @@ load_dotenv(dotenv_path)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# For user uploaded files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
 AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
     'avatar.providers.LibRAvatarProvider',
@@ -42,7 +38,12 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # DEBUG = os.getenv('DEBUG')
 DEBUG = os.environ.get('DEBUG')
 
-MEDIA_ROOT = '/mediafiles/'
+# For user uploaded files
+if DEBUG:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
+else:
+    MEDIA_ROOT = '/mediafiles/'
 
 ALLOWED_HOSTS = ['*']
 
