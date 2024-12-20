@@ -43,7 +43,7 @@ if DEBUG:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = '/media/'
 else:
-    MEDIA_ROOT = '/opt/render/project/src/mediafiles/'
+    MEDIA_ROOT = '/opt/render/project/src/mediafiles'
 
 ALLOWED_HOSTS = ['*']
 
