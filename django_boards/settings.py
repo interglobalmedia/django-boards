@@ -39,10 +39,10 @@ DEBUG = os.getenv('DEBUG')
 # DEBUG = os.environ.get('DEBUG')
 
 # For user uploaded files locally
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 # For user uploaded files on render.com
-# MEDIA_ROOT = '/opt/render/project/src/mediafiles/'
+MEDIA_ROOT = '/opt/render/project/src/mediafiles/'
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['*']
