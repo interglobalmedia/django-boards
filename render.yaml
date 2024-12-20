@@ -1,0 +1,22 @@
+databases:
+  - name: django-boards-db
+    plan: starter
+    databaseName: django_boards_db
+    user: django_boards_db_user
+
+services:
+  - type: web
+    plan: free
+    name: django-boards
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn django-boards.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: django-boards-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
