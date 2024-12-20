@@ -42,6 +42,9 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # DEBUG = os.getenv('DEBUG')
 DEBUG = os.environ.get('DEBUG')
 
+if not DEBUG:
+    MEDIA_ROOT = '/mediafiles/'
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
