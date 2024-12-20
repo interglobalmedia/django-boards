@@ -39,11 +39,11 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 DEBUG = os.environ.get('DEBUG')
 
 # For user uploaded files
-if DEBUG:
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = '/media/'
-else:
-    MEDIA_ROOT = '/opt/render/project/src/mediafiles'
+# if DEBUG:
+#     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#     MEDIA_URL = '/media/'
+# else:
+MEDIA_ROOT = '/opt/render/project/src/mediafiles'
 
 ALLOWED_HOSTS = ['*']
 
