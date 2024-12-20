@@ -44,8 +44,8 @@ MEDIA_URL = '/media/'
 # For user uploaded files on render.com
 # MEDIA_ROOT = '/opt/render/project/src/mediafiles/'
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
