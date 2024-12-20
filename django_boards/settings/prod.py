@@ -2,7 +2,7 @@ import os
 from .base import BASE_DIR
 import dj_database_url
 
-DEBUG = os.environ.get('DEBUG')
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
