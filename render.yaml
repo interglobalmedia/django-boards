@@ -1,6 +1,6 @@
 databases:
   - name: django-boards-db
-    plan: starter
+    plan: basic-256mb
     databaseName: django_boards_db
     user: django_boards_db_user
 
