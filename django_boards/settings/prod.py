@@ -3,7 +3,7 @@ from .base import BASE_DIR
 import dj_database_url
 
 DEBUG = os.environ.get('DEBUG')
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['*']
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DATABASES = {
