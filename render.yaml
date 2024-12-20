@@ -7,10 +7,11 @@ databases:
 services:
   - type: web
     plan: starter
+    region: virginia
     name: django-boards
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn django-boards.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "python -m gunicorn django_boards.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
