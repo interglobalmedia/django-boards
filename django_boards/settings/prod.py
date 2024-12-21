@@ -5,6 +5,7 @@ import dj_database_url
 DEBUG = False
 ALLOWED_HOSTS = ['*']
 SECRET_KEY = os.environ.get('SECRET_KEY')
+PROD = os.environ.get('PROD')
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
