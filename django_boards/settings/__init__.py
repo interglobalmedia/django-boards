@@ -1,7 +1,8 @@
 from .base import *
 # you need to set "myproject = 'prod'" as an environment variable
 # in your OS (on which your website is hosted)
-if os.environ.get('django_boards') == 'prod':
+PROD = os.environ.get('PROD')
+if PROD == True:
    from .prod import *
 else:
    from .dev import *
