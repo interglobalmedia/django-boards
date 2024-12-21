@@ -44,6 +44,7 @@ MEDIA_URL = '/media/'
 # For user uploaded files on render.com
 MEDIA_ROOT = '/opt/render/project/src/mediafiles/'
 
+# Local only
 # ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ['*']
 
@@ -139,7 +140,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -159,9 +159,10 @@ USE_TZ = True
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# Local only (Render)
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
 
 # This production code might break development mode, so we check whether we're in DEBUG mode
 # Tell Django to copy static assets into a path called `static` (this is specific to Render)
