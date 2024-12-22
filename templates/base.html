@@ -84,7 +84,8 @@
             // Handle errors
             console.error(error)
           })
-          history.go(0)
+          // Causes page refresh without reloading page
+          window.location = window.location
       })
       </script>
       <!-- JQuery -->
