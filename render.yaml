@@ -1,6 +1,7 @@
 databases:
   - name: django-boards-db
     plan: basic-256mb
+    region: virginia
     databaseName: django_boards_db
     user: django_boards_db_user
 
