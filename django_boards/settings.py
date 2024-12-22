@@ -117,7 +117,7 @@ WSGI_APPLICATION = 'django_boards.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
+# Render database
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
 }
@@ -165,7 +165,6 @@ STATIC_URL = '/static/'
 
 # This production code might break development mode, so we check whether we're in DEBUG mode
 # Tell Django to copy static assets into a path called `static` (this is specific to Render)
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
