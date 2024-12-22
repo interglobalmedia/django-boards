@@ -75,10 +75,10 @@
               likeCount.textContent = `Likes: ${data.likes.count}`
               if (data.liked) {
                   likeButton.textContent = '👎';
-                  likeCount.textContent = `Likes: ${data.likes.count}`
+                  likeCount.textContent = `Likes: ${data.likes.count}` + 1
               } else {
                   likeButton.textContent = '👍'
-                  likeCount.textContent = `Likes: ${data.likes.count}`
+                  likeCount.textContent = `Likes: ${data.likes.count}` - 1
               }
           }).catch(error => {
             // Handle errors
