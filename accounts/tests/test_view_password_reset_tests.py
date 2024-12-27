@@ -45,10 +45,11 @@ class PasswordResetTests(TestCase):
 
     def test_form_inputs(self):
         '''
-        The view must contain two inputs: csrf and email
+        The view must contain three inputs: csrf, email and submit
         '''
-        self.assertContains(self.response, '<input', 2)
+        self.assertContains(self.response, '<input', 3)
         self.assertContains(self.response, 'type="email"', 1)
+        self.assertContains(self.response, 'type="submit"', 1)
 
 class SuccessfulPasswordResetTests(TestCase):
     def setUp(self):
