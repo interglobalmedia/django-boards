@@ -30,12 +30,11 @@ class SignUpTests(TestCase):
 
     def test_form_inputs(self):
         """
-        The view must contain 9 inputs: csrf, username, first_name, last_name, email, password1, password2, two usable passwords of type radio (for pass 1 and 2).
+        The view must contain 7 inputs: csrf, username, first_name, last_name, email, password1, and password2.
         """
-        self.assertContains(self.response, "<input", 9)
+        self.assertContains(self.response, "<input", 7)
         self.assertContains(self.response, 'type="text"', 3)
         self.assertContains(self.response, 'type="password"', 2)
-        self.assertContains(self.response, 'type="radio"', 2)
         self.assertContains(self.response, 'type="email"', 1)
         self.assertContains(self.response, 'type="hidden"', 1)
 
