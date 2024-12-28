@@ -15,6 +15,8 @@ from pathlib import Path
 import dj_database_url
 from decouple import config, Csv
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'django_boards.settings.production'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
