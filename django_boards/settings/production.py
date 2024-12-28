@@ -2,7 +2,7 @@ from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # using decouple
-DEBUG = False
+DEBUG = config("DEBUG", default=False)
 
 # using decouple to point to ALLOWED_HOSTS env var on render
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
