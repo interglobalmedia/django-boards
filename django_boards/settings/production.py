@@ -7,7 +7,7 @@ DEBUG = config("DEBUG", default=False)
 # using decouple to point to ALLOWED_HOSTS env var on render
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
-MEDIA_ROOT = config('MEDIA_ROOT', default='/opt/render/project/src/mediafiles')
+MEDIA_ROOT = config("MEDIA_ROOT", default="/opt/render/project/src/mediafiles")
 
 # Render database
 # using decouple
