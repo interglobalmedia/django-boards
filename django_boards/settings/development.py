@@ -2,7 +2,7 @@ from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # using decouple
-DEBUG = True
+DEBUG = config("DEBUG", default=True)
 
 # using decouple to point to ALLOWED_HOSTS env var locally
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
