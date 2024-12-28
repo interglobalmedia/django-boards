@@ -93,7 +93,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "django_boards.settings.urls"
+ROOT_URLCONF = "django_boards.urls"
 
 TEMPLATES = [
     {
@@ -113,6 +113,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "django_boards.wsgi.application"
+ASGI_APPLICATION = "django_boards.asgi.application"
 
 # Local Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
