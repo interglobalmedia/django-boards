@@ -36,8 +36,6 @@ SECRET_KEY = config("SECRET_KEY")
 # using decouple
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-# For user uploaded files locally
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL is the same in both local development and production
 MEDIA_URL = "/media/"
 
