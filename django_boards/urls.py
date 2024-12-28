@@ -24,7 +24,7 @@ from boards import views
 from django.contrib.auth import views as auth_views
 
 from django.conf import settings
-from django_boards.settings import development, base
+from django_boards.settings import development, base, production
 from django.conf.urls.static import static
 from django.contrib import admin
 
@@ -57,3 +57,5 @@ urlpatterns = [
 ] 
 if development:
     urlpatterns += static(base.MEDIA_URL, document_root=development.MEDIA_ROOT)
+else:
+    urlpatterns += static(base.MEDIA_URL, document_root=production.MEDIA_ROOT)
