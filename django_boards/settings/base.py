@@ -52,9 +52,6 @@ MEDIA_URL = "/media/"
 # Using decouple
 MEDIA_ROOT = config("MEDIA_ROOT", default="/opt/render/project/src/mediafiles/")
 
-# using decouple only one line is necessary to cover both local and production environments
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default='django-boards.onrender.com', cast=Csv())
-
 # Application definition
 
 INSTALLED_APPS = [

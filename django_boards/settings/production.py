@@ -10,3 +10,6 @@ DATABASES = {
 # Tell Django to copy static assets into a path called `static` (this is specific to Render)
 STATIC_ROOT = BASE_DIR / '../staticfiles'
 
+# using decouple only one line is necessary to cover both local and production environments
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+
