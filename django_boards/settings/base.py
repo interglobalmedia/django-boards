@@ -110,21 +110,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "django_boards.wsgi.application"
-ASGI_APPLICATION = "django_boards.asgi.application"
-
-# Local Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-# Render database
-# using decouple
-# DATABASES = {
-#     "default": dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600),
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -161,15 +146,6 @@ USE_TZ = True
 # This setting informs Django of the URI path from which your static files will be served to users
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = "/static/"
-
-# Local only
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-# ]
-
-# This production code might break development mode, so we check whether we're in DEBUG mode
-# Tell Django to copy static assets into a path called `static` (this is specific to Render)
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
