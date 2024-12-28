@@ -1,4 +1,8 @@
 from .base import *
+
+# using decouple to point to ALLOWED_HOSTS env var locally
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+
 # Local Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
@@ -12,5 +16,3 @@ DATABASES = {
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "../static"),
 ]
-
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
