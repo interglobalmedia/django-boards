@@ -33,18 +33,11 @@ AVATAR_PROVIDERS = (
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG')
-# DEBUG = os.environ.get('DEBUG')
 # using decouple
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-# For user uploaded files locally
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_URL is the same in both local development and production
 MEDIA_URL = "/media/"
-# For user uploaded files on render.com
-# MEDIA_ROOT = "/opt/render/project/src/mediafiles/"
-# Using decouple
-MEDIA_ROOT = config("MEDIA_ROOT", default="/opt/render/project/src/mediafiles/")
 
 # Application definition
 

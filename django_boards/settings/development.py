@@ -3,6 +3,9 @@ from .base import *
 # using decouple to point to ALLOWED_HOSTS env var locally
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
+# For user uploaded files locally
+MEDIA_ROOT = os.path.join(BASE_DIR, "../media")
+
 # Local Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
