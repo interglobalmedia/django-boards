@@ -4,7 +4,7 @@ from .base import *
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
 # For user uploaded files on render.com
-MEDIA_ROOT = "/opt/render/project/src/mediafiles/"
+MEDIA_ROOT = config("MEDIA_ROOT", default="/opt/render/project/src/mediafiles/")
 
 # Render database
 # using decouple
