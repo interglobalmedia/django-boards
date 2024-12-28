@@ -3,8 +3,9 @@ from .base import *
 # using decouple to point to ALLOWED_HOSTS env var on render
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
-# For user uploaded files on render.com
-MEDIA_ROOT = config("MEDIA_ROOT")
+MEDIA_ROOT_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MEDIA_ROOT = os.path.join(MEDIA_ROOT_BASE_DIR, 'mediafiles')
 
 # Render database
 # using decouple
