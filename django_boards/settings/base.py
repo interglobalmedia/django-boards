@@ -93,7 +93,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "../django_boards.urls"
+ROOT_URLCONF = "django_boards.settings.urls"
 
 TEMPLATES = [
     {
