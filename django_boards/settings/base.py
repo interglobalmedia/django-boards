@@ -39,8 +39,6 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 # MEDIA_URL is the same in both local development and production
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "../mediafiles")
-
 # Application definition
 
 INSTALLED_APPS = [
