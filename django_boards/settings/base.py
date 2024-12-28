@@ -34,7 +34,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # using decouple
-DEBUG = config("DEBUG", default=False, cast=bool)
+# DEBUG = config("DEBUG", default=False, cast=bool)
 
 # MEDIA_URL is the same in both local development and production
 MEDIA_URL = "/media/"
