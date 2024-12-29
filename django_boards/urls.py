@@ -54,7 +54,7 @@ urlpatterns = [
     ),
     path('avatar/', include('avatar.urls')),
     path('admin/', admin.site.urls),
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': production.MEDIA_ROOT}),
+    re_path(r'^media/(?P<path>.*\.jpg|.*\.png|.*\.gif)$', serve, {'document_root': production.MEDIA_ROOT}),
 ] 
 if development:
     urlpatterns += static(base.MEDIA_URL, document_root=development.MEDIA_ROOT)
