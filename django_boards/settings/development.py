@@ -8,9 +8,9 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
 # For user uploaded files locally
-# MEDIA_ROOT = os.path.join(BASE_DIR, "../media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "../media")
 
-MEDIA_ROOT = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'media'))
+# MEDIA_ROOT = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'media'))
 print(MEDIA_ROOT, 'media root in development')
 
 # Local Database
