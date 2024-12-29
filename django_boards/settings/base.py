@@ -14,11 +14,13 @@ import os
 from pathlib import Path
 import dj_database_url
 from decouple import config, Csv
+from dotenv import load_dotenv
+load_dotenv() # take environment variables from .env
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-DEBUG = config("DEBUG", default=False)
 
 AVATAR_PROVIDERS = (
     "avatar.providers.PrimaryAvatarProvider",
