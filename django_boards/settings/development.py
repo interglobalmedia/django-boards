@@ -1,8 +1,8 @@
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# using decouple
-# DEBUG = config("DEBUG", default=False)
+# using pyhon-dotenv
+DEBUG = os.getenv('DEBUG')
 
 # using decouple to point to ALLOWED_HOSTS env var locally
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
