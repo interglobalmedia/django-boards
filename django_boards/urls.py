@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from accounts import views as accounts_views
 from boards import views
@@ -25,7 +25,7 @@ from django.contrib.auth import views as auth_views
 
 from django.conf import settings
 from django_boards.settings import development, base, production
-from django.conf.urls.static import static
+from django.conf.urls.static import static, serve
 from django.contrib import admin
 
 urlpatterns = [
@@ -54,8 +54,7 @@ urlpatterns = [
     ),
     path('avatar/', include('avatar.urls')),
     path('admin/', admin.site.urls),
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': production.MEDIA_ROOT}),
 ] 
 if development:
     urlpatterns += static(base.MEDIA_URL, document_root=development.MEDIA_ROOT)
-else:
-    urlpatterns += static(base.MEDIA_URL, document_root=production.MEDIA_ROOT)
