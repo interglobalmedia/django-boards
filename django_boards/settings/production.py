@@ -11,7 +11,7 @@ MEDIA_ROOT = os.environ.get("MEDIA_ROOT", "/opt/render/project/src/mediafiles")
 
 # Render database
 # using decouple
-# DATABASES = {
+DATABASES = {
     "default": dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600),
 }
 
