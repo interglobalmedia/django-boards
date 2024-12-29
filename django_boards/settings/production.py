@@ -1,8 +1,8 @@
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# using decouple
-# DEBUG = config("DEBUG", default=False)
+# using environ
+DEBUG = os.environ.get('DEBUG')
 
 # using decouple to point to ALLOWED_HOSTS env var on render
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
@@ -11,7 +11,7 @@ MEDIA_ROOT = os.environ.get("MEDIA_ROOT", "/opt/render/project/src/mediafiles")
 
 # Render database
 # using decouple
-DATABASES = {
+# DATABASES = {
     "default": dj_database_url.config(default=config("DATABASE_URL"), conn_max_age=600),
 }
 
