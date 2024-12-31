@@ -45,6 +45,7 @@ MEDIA_URL = "/media/"
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -99,7 +100,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "django_boards.wsgi.application"
+# WSGI_APPLICATION = "django_boards.wsgi.application"
+ASGI_APPLICATION = "django_boards.asgi.application"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
