@@ -12,9 +12,6 @@ from django.utils.decorators import method_decorator
 from .forms import NewTopicForm
 from .forms import PostForm
 from .models import Board, Topic, Post
-from accounts.models import Profile
-from django.contrib.auth.models import User
-import math
 import nh3
 from django.http import JsonResponse
 
