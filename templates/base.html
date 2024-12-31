@@ -85,7 +85,7 @@
             console.error(error)
           })
           // Causes page refresh without reloading page
-          window.location = window.location
+          {% comment %} window.location = window.location {% endcomment %}
           history.go(0)
       })
       </script>
