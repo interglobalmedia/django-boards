@@ -7,20 +7,20 @@ DEBUG = os.getenv('DEBUG')
 # using decouple to point to ALLOWED_HOSTS env var locally
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
+# the absolute path to media directory
 # For user uploaded files locally
-MEDIA_ROOT = os.path.join(BASE_DIR, "../media")
+MEDIA_ROOT = os.path.abspath('/Users/mariacam/Python-Development/django-boards/media/')
 
-# MEDIA_ROOT = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'media'))
 print(MEDIA_ROOT, 'media root in development')
 
-# Local Database
+# Local Database. Comment out before deploying to production
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "../db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": CURRENT_DIR + "db.sqlite3",
+#     }
+# }
 
 # Local only
 STATICFILES_DIRS = [
