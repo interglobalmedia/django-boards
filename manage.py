@@ -6,6 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
+    # in order for development env to work, must be set to development here locally. But change before committing changes and deploying to production.
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_boards.settings.production')
     try:
         from django.core.management import execute_from_command_line
