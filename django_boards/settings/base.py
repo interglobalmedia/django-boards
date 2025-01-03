@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "boards",
     "accounts",
+    "faqs",
     "dotenv",
     "pylint",
     "graphviz",

@@ -30,7 +30,8 @@ from django.contrib import admin
 
 urlpatterns = [
     path("", views.BoardListView.as_view(), name="index"),
-    path('', include('accounts.urls')),
+    path("", include("accounts.urls")),
+    path("", include('faqs.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path("boards/<pk>/", views.TopicListView.as_view(), name="board_topics"),
     path("boards/<pk>/new/", views.new_topic, name="new_topic"),
@@ -54,7 +55,7 @@ urlpatterns = [
     ),
     path('avatar/', include('avatar.urls')),
     path('admin/', admin.site.urls),
-    # must be commented out in development
+    # No longer has to be commented out because exported MEDIA_ROOT locally from .env
     re_path(r'^media/(?P<path>.*\.jpg|.*\.jpeg|.*\.png|.*\.gif)$', serve, {'document_root': production.MEDIA_ROOT}),
 ] 
 if development:
