@@ -12,6 +12,8 @@ MEDIA_ROOT = os.getenv("MEDIA_ROOT")
 
 print(MEDIA_ROOT, 'media root in development')
 
+WSGI_APPLICATION = "django_boards.wsgi.application"
+
 # correct absolute path in which db.sqlite3 resides
 CURRENT_DIR= '/Users/mariacam/Python-Development/django-boards/'
 
