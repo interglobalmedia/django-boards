@@ -55,7 +55,7 @@ urlpatterns = [
     ),
     path('avatar/', include('avatar.urls')),
     path('admin/', admin.site.urls),
-    # must be commented out in development
+    # No longer has to be commented out because exported MEDIA_ROOT locally from .env
     re_path(r'^media/(?P<path>.*\.jpg|.*\.jpeg|.*\.png|.*\.gif)$', serve, {'document_root': production.MEDIA_ROOT}),
 ] 
 if development:
