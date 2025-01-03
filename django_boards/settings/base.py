@@ -36,9 +36,6 @@ AVATAR_PROVIDERS = (
 # using decouple
 SECRET_KEY = config("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# using decouple
-
 # MEDIA_URL is the same in both local development and production
 MEDIA_URL = "/media/"
 
