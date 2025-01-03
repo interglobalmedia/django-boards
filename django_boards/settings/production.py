@@ -10,6 +10,7 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", "/opt/render/project/src/mediafiles")
 print(MEDIA_ROOT, "media root")
 
+ASGI_APPLICATION = "django_boards.asgi.application"
 
 # Render database 
 # using decouple
