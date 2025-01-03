@@ -14,7 +14,7 @@
 
 ### Background
 
-This is a Django application called Django Boards, based on Vitor Freitas' Django Boards application in his tutorial series called "A Complete Beginner's Guide to Django" from 2017. When I came across it, I thought it would be great for my technical documentation portfolio to refactor/update the application to 2024 standards and code, as well as add my own features to it. To learn more about my refactoring of this application, please visit my personal site [mariadcampbell.com](https://www.mariadcampbell.com) and search for [How to create a fullstack application using Django and Python Table of Contents](/blog/how-to-create-a-fullstack-application-using-django-and-python-table-of-contents) in the Search bar.
+This is a Django application called Django Boards, based on Vitor Freitas' Django Boards application in his tutorial series called "A Complete Beginner's Guide to Django" from 2017. When I came across it, I thought it would be great for my technical documentation portfolio to refactor/update the application to 2024 standards and code, as well as add my own features to it. To learn more about my refactoring of this application, please visit my personal site [mariadcampbell.com](https://www.mariadcampbell.com) and search for [How to create a fullstack application using Django and Python Table of Contents](https://www.mariadcampbell.com/blog/how-to-create-a-fullstack-application-using-django-and-python-table-of-contents) in the Search bar.
 
 ### Purpose
 
@@ -70,4 +70,4 @@ No. It is a very new site. If you want to engage in an established Django Forum,
 
 ## Where to find my Django Boards related posts
 
-Link to my [How to create a fullstack application using Django and Python Table of Contents](/blog/how-to-create-a-fullstack-application-using-django-and-python-table-of-contents) on my personal blog called [mariadcampbell.com](https://www.mariadcampbell.com): [How to create a fullstack application using Django and Python Table of Contents](/blog/how-to-create-a-fullstack-application-using-django-and-python-table-of-contents).
+Link to my [How to create a fullstack application using Django and Python Table of Contents](https://www.mariadcampbell.com/blog/how-to-create-a-fullstack-application-using-django-and-python-table-of-contents) on my personal blog called [mariadcampbell.com](https://www.mariadcampbell.com): [How to create a fullstack application using Django and Python Table of Contents](https://www.mariadcampbell.com/blog/how-to-create-a-fullstack-application-using-django-and-python-table-of-contents).
