@@ -35,19 +35,33 @@ This side does not have a Markdown editor. You have to add your own Markdown sty
 Available tags:
 
 a
+
 abbr
+
 acronym
+
 b
+
 blockquote
+
 code
+
 em
+
 i
+
 li
+
 ol
+
 strong
+
 ul
+
 s
+
 sup
+
 sub
 
 ### Is this an established forum?
