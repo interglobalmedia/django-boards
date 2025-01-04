@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
-from dotenv import load_dotenv
-load_dotenv()  # take environment variables from .env
-dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
-load_dotenv(dotenv_path)
-from django_boards.settings import development, production
 import sys
 
 def main():
