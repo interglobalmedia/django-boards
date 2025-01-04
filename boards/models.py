@@ -96,7 +96,7 @@ class Post(models.Model):
             "abbr": {"title"},
             "acronym": {"title"},
         },
-        url_schemes={"http", "https", "mailto"},
+        url_schemes={"https"},
         link_rel=None,)
         rendered_content = markdown(clean_content, extensions=['fenced_code', 'codehilite'])
         return mark_safe(rendered_content)
