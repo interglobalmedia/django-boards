@@ -4,6 +4,13 @@ from .base import *
 # using environ
 DEBUG = False
 
+# Added as a result of running "python manage.py check --settings=django_boards.settings.production --deploy" in render's shell
+SECURE_SSL_REDIRECT=True
+
+SESSION_COOKIE_SECURE=True
+
+CSRF_COOKIE_SECURE=True
+
 # using decouple to point to ALLOWED_HOSTS env var on render
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
