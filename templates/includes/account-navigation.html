@@ -12,34 +12,27 @@
     <div class="collapse navbar-collapse text-white" id="n_bar">
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
-          {% if request.get_full_path == "/profiles/" %}
+          {% if request.get_full_path == "/account/" %}
             <li class="nav-item">
               <a href="{% url 'faqs_index' %}" class="nav-item nav-link">FAQS</a>
             </li>
             <li class="nav-item mb-0">
               <a class="nav-item nav-link" href="{% url 'users-profile' %}">My Profile</a>
             </li>
-          {% else %}
-            <li class="nav-item">
-              <a href="{% url 'faqs_index' %}" class="nav-item nav-link">FAQS</a>
-            </li>
             <li class="nav-item mb-0">
               <a href="{% url 'users-profile-list' %}" class="nav-item nav-link">All Profiles</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-item nav-link align-middle"
+                 href="{% url 'password_change' %}">Change Password</a>
+            </li>
+            <li class="nav-item">
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-primary mb-2 mt-2 logout" type="submit">Logout</button>
+              </form>
+            </li>
           {% endif %}
-          <li class="nav-item align-middle">
-            <a href="{% url 'my_account' %}" class="nav-item nav-link">My Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-item nav-link align-middle"
-               href="{% url 'password_change' %}">Change Password</a>
-          </li>
-          <li class="nav-item">
-            <form method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button class="btn btn-secondary mb-2 mt-2 logout" type="submit">Logout</button>
-            </form>
-          </li>
         {% else %}
           <li class="nav-item">
             <a href="{% url 'faqs_index' %}" class="nav-item nav-link">FAQS</a>
