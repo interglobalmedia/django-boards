@@ -5,6 +5,8 @@ from .base import *
 DEBUG = False
 
 # Added as a result of running "python manage.py check --settings=django_boards.settings.production --deploy" in render's shell
+SECURE_HSTS_SECONDS=60
+
 SECURE_SSL_REDIRECT=True
 
 SESSION_COOKIE_SECURE=True
