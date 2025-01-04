@@ -13,6 +13,9 @@
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
           <li class="nav-item">
+            <a href="{% url 'faqs_index' %}" class="nav-item nav-link">FAQS</a>
+          </li>
+          <li class="nav-item">
             <a href="{% url 'users-profile-list' %}" class="nav-item nav-link">All Profiles</a>
           </li>
           <li class="nav-item">
