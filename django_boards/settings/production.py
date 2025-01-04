@@ -19,7 +19,7 @@ print(MEDIA_ROOT, "media root")
 
 ASGI_APPLICATION = "django_boards.asgi.application"
 
-# Render database 
+# Render database
 # using decouple
 # comment out while in local development
 DATABASES = {
