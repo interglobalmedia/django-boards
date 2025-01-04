@@ -11,14 +11,12 @@ import sys
 def main():
     """Run administrative tasks."""
     # in order for development env to work, must be set to development here locally. Must be set to production before deploying to Render. The "if elif" condition takes care of that.
-    DEVELOPMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")
-    PRODUCTION_ENVIRONMENT = os.environ.get("ENVIRONMENT")
     if development:
         print(development, 'in development')
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DEVELOPMENT_ENVIRONMENT")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_boards.settings.development")
     elif production:
         print(production, 'in production')
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PRODUCTION_ENVIRONMENT")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_boards.settings.production")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
