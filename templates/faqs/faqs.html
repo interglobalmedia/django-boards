@@ -43,7 +43,7 @@
             {% for faq in faqs %}
               <li>
                 <h3>{{ faq.question }}</h3>
-                <p>{{ faq.answer|safe }}</p>
+                <p>{{ faq.answer|linebreaksbr }}</p>
               </li>
             {% endfor %}
           </ol>
