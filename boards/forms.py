@@ -1,11 +1,13 @@
-from django import forms
-from .models import Topic, Post
 import nh3
+from django import forms
+
+from .models import Post, Topic
+
 
 class HtmlSanitizedCharField(forms.CharField):
     def to_python(self, value):
         value = super().to_python(value)
-        print(value, 'the Charfield value')
+        print(value, "the Charfield value")
         if value not in self.empty_values:
             value = nh3.clean(
                 value,
@@ -33,8 +35,10 @@ class HtmlSanitizedCharField(forms.CharField):
                     "acronym": {"title"},
                 },
                 url_schemes={"https"},
-                link_rel=None,)
+                link_rel=None,
+            )
         return value
+
 
 class NewTopicForm(forms.ModelForm):
     message = forms.CharField(
@@ -47,9 +51,10 @@ class NewTopicForm(forms.ModelForm):
         model = Topic
         fields = ["subject", "message"]
 
+
 class PostForm(forms.ModelForm):
     message = HtmlSanitizedCharField(widget=forms.Textarea)
 
     class Meta:
         model = Post
-        fields = ['message']
+        fields = ["message"]

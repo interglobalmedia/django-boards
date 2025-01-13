@@ -1,12 +1,11 @@
+import bs4
+import soupsieve as sv
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import resolve, reverse
 
 from ..forms import SignUpForm
 from ..views import signup
-
-import bs4
-import soupsieve as sv
 
 
 class SignUpTests(TestCase):
@@ -72,7 +71,7 @@ class SignUpTests(TestCase):
             <div class="form-group">
                 <label for="id_password2">Password confirmation:</label>
                 <input type="password" name="password2" autocomplete="new-password" class="form-control " aria-describedby="id_password2_helptext" id="id_password2" data-np-autofill-field-type="newPassword" data-np-uid="4423502f-ac5e-426a-95b0-f06b3ce13f72">
-                
+
                 <small class="form-text text-muted">
                     Enter the same password as before, for verification.
                 </small>
@@ -89,7 +88,7 @@ class SignUpTests(TestCase):
 
             </div>
         </div>
-    
+
             <small class="form-text text-muted">
                 Whether the user will be able to authenticate using a password or not. If disabled, they may still be able to authenticate using other backends, such as Single Sign-On or LDAP.
             </small>
@@ -99,8 +98,8 @@ class SignUpTests(TestCase):
         """
         soup = bs4.BeautifulSoup(text, "html5lib")
         sv.select(
-                "form:is(.signup-form)",
-                soup,
+            "form:is(.signup-form)",
+            soup,
         )
         print(
             sv.select(
@@ -108,7 +107,7 @@ class SignUpTests(TestCase):
                 soup,
             )
         )
-        for tag in soup.find_all('input'):
+        for tag in soup.find_all("input"):
             print(tag)
 
 

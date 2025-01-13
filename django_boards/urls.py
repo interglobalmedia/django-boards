@@ -15,27 +15,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf import settings
+from django.conf.urls.static import serve, static
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.contrib.auth import views as auth_views
+from django.urls import include, path, re_path
 
 from accounts import views as accounts_views
 from boards import views
-
-from django.contrib.auth import views as auth_views
-
-from django.conf import settings
-from django_boards.settings import development, base, production
-from django.conf.urls.static import static, serve
-from django.contrib import admin
+from django_boards.settings import base, development, production
 
 urlpatterns = [
     path("", views.BoardListView.as_view(), name="index"),
     path("", include("accounts.urls")),
-    path("", include('faqs.urls')),
+    path("", include("faqs.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("boards/<pk>/", views.TopicListView.as_view(), name="board_topics"),
     path("boards/<pk>/new/", views.new_topic, name="new_topic"),
-    path("boards/<pk>/topics/<topic_pk>/", views.PostListView.as_view(), name="topic_posts"),
+    path(
+        "boards/<pk>/topics/<topic_pk>/",
+        views.PostListView.as_view(),
+        name="topic_posts",
+    ),
     path("boards/<pk>/topics/<topic_pk>/reply/", views.reply_topic, name="reply_topic"),
     path(
         "boards/<pk>/topics/<topic_pk>/posts/<post_pk>/edit/",
@@ -47,16 +48,20 @@ urlpatterns = [
         views.PostDetailView.as_view(),
         name="post_detail",
     ),
-    path('like/<int:post_id>/', views.like_post, name='like_post'),
+    path("like/<int:post_id>/", views.like_post, name="like_post"),
     path(
         "boards/<pk>/topics/<topic_pk>/posts/<post_pk>/delete/",
         views.PostDeleteView.as_view(),
         name="delete_post",
     ),
-    path('avatar/', include('avatar.urls')),
-    path('admin/', admin.site.urls),
+    path("avatar/", include("avatar.urls")),
+    path("admin/", admin.site.urls),
     # No longer has to be commented out because exported MEDIA_ROOT locally from .env
-    re_path(r'^media/(?P<path>.*\.jpg|.*\.jpeg|.*\.png|.*\.gif)$', serve, {'document_root': production.MEDIA_ROOT}),
-] 
+    re_path(
+        r"^media/(?P<path>.*\.jpg|.*\.jpeg|.*\.png|.*\.gif)$",
+        serve,
+        {"document_root": production.MEDIA_ROOT},
+    ),
+]
 if development:
     urlpatterns += static(base.MEDIA_URL, document_root=development.MEDIA_ROOT)
