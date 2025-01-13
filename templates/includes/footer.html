@@ -1,9 +1,9 @@
 <footer class="site-footer text-center">
-  <script>
+    <script>
                     const theDate = new Date();
                     const footer = document.querySelector(".site-footer");
-                    footer.style.fontWeight = "400";
-                    footer.style.letterSpacing = "0.07rem";
+                    {% comment %} footer.style.fontWeight = "400"; {% endcomment %}
+                    {% comment %} footer.style.letterSpacing = "0.07rem"; {% endcomment %}
                     footer.style.fontFamily = "'Quicksand', sans-serif;";
                     footer.style.fontSize = `1.2rem`;
                     footer.style.height = `6rem`;
@@ -20,5 +20,5 @@
                     anchor.setAttribute('href', '/')
                     footer.appendChild(anchor)
                     anchor.innerHTML = `Django Boards`
-  </script>
+    </script>
 </footer>
