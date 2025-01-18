@@ -16,4 +16,4 @@ class SignalTests(TestCase):
 
     def test_save_profile_handler_fail(sender, **kwargs):
         if not sender:
-            assertFalse(save_profile)
+            sender.assertFalse(save_profile)
