@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "boards",
     "accounts",
     "faqs",
-    "dotenv",
     "pylint",
     "graphviz",
     "djlint",
