@@ -19,12 +19,12 @@ CURRENT_DIR = "/Users/mariacam/Python-Development/django-boards/"
 
 # Local Database. Comment out before deploying to production
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": CURRENT_DIR + "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": CURRENT_DIR + "db.sqlite3",
+    }
+}
 
 # Local only
 STATICFILES_DIRS = [
