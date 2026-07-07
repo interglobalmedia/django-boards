@@ -24,14 +24,11 @@ class InputClassTests(TestCase):
         form = ExampleForm()  # unbound form
         self.assertEqual("form-control ", input_class(form["name"]))
 
-    def test_valid_bound_field(self):
-        form = ExampleForm(
-            {"name": "john", "password": "123"}
-        )  # bound form (field + data)
-        # this actually reflects logic in templatetags/form_tags.py to fix invalid data passing as valid
-        self.assertEqual("form-control is-invalid", input_class(form["name"]))
-        self.assertEqual("form-control is-invalid", input_class(form["password"]))
-
     def test_invalid_bound_field(self):
         form = ExampleForm({"name": "", "password": "123"})  # bound form (field + data)
         self.assertEqual("form-control is-invalid", input_class(form["name"]))
+
+    def test_valid_bound_field(self):
+        form = ExampleForm({"name": "john", "password": "123"})
+        self.assertEqual("form-control is-valid", input_class(form["name"]))
+        self.assertEqual("form-control ", input_class(form["password"]))
