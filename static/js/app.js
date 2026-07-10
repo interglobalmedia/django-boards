@@ -3,7 +3,6 @@ import {
   scrollFunction,
   backToTop,
 } from './scroll-top.js'
-import { copyButton } from './copy-button.js'
 
 // When the user scrolls down 20px from the top of the document, show the button. This must come first.
 window.onscroll = function () {
@@ -14,4 +13,16 @@ window.onscroll = function () {
 scrollTopButton.addEventListener("pointerdown", backToTop)
 
 // inits
-const copyButtonInit = copyButton()
+const url = document.location.href;
+
+const copyButton = new Clipboard('.copy-button', {
+  text: function () {
+    return url
+  }
+})
+
+// added July 10, 2026. Mentioned in Fullstack Django Application Part 22.
+let paginationBody = document.querySelector('.page-item');
+if (paginationBody) {
+  paginationBody.scrollIntoView()
+}
