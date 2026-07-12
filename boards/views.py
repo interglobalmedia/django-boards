@@ -27,9 +27,7 @@ def like_post(request, post_id):
         post.likes.add(request.user)
         liked = True
 
-        return JsonResponse({"likes_count": post.likes.count(), "liked": liked})
-
-    return JsonResponse({"error": "Invalid request"})
+    return JsonResponse({"likes_count": post.likes.count(), "liked": liked})
 
 
 @method_decorator(login_required, name="dispatch")
