@@ -59,33 +59,15 @@
                   'X-CSRFToken': '{{ csrf_token }}',
               },
           })
-          .then(response => {
-            if (response.headers.get('Content-Type').includes('application/json')) {
-              // Parse as JSON
-              return response.json();
-            } else if (response.headers.get('Content-Type').includes('text/plain')) {
-              // Parse as text
-              return response.text();
-            } else {
-              // Handle other response types or errors
-              throw new Error('Unexpected response type');
-            }
-          })
+          .then(response => response.json())
           .then(data => {
-              likeCount.textContent = `Likes: ${data.likes.count}`
-              if (data.liked) {
-                  likeButton.textContent = '👎';
-                  likeCount.textContent = `Likes: ${data.likes.count}` + 1
-              } else {
-                  likeButton.textContent = '👍'
-                  likeCount.textContent = `Likes: ${data.likes.count}` - 1
-              }
+              likeCount.textContent = `Likes: ${data.likes_count}`
+              likeButton.textContent = data.liked ? '👎' : '👍';
+              setTimeout(() => history.go(0), 1000);
           }).catch(error => {
             // Handle errors
             console.error(error)
           })
-          // Causes page refresh without reloading page
-          history.go(0)
       })
             </script>
             <!-- JQuery -->
