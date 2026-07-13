@@ -49,26 +49,27 @@
         {% endblock body %}
         {% block javascript %}
             <script>
-      const likeButton = document.getElementById('like-button');
-      const likeCount = document.getElementById('like-count');
-      likeButton.addEventListener('pointerdown', function() {
-          const postId = this.dataset.postId
-          fetch(`/like/${postId}/`, {
-              method: 'POST',
-              headers: {
-                  'X-CSRFToken': '{{ csrf_token }}',
-              },
-          })
-          .then(response => response.json())
-          .then(data => {
-              likeCount.textContent = `Likes: ${data.likes_count}`
-              likeButton.textContent = data.liked ? '👎' : '👍';
-              setTimeout(() => history.go(0), 1000);
-          }).catch(error => {
-            // Handle errors
-            console.error(error)
-          })
-      })
+            const likeButton = document.getElementById('like-button')
+            const likeEmoji = document.getElementById('like-emoji')
+            const likeCount = document.getElementById('like-count')
+
+            likeButton.addEventListener('pointerdown', function () {
+                const postId = this.dataset.postId
+                fetch(`/like/${postId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    likeCount.textContent = `Likes: ${data.likes_count}`
+                    likeEmoji.textContent = data.liked ? '👎' : '👍'
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+            })
             </script>
             <!-- JQuery -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
